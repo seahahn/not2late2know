@@ -19,15 +19,15 @@ RUN pip install -r requirements.txt
 WORKDIR /app/not2late2know
 
 # flask 실행 위한 환경변수 설정
-# ENV FLASK_APP='dnd_app' \
-#     FLASK_ENV='production'
+ENV FLASK_APP='not2late2know/app.py' \
+    FLASK_ENV='production'
 
 # EXPOSE: 컨테이너 실행 시 노출될 포트
 EXPOSE 5000
 
 # ENTRYPOINT: 컨테이너 시작 시 기본으로 실행되는 명령어 
-ENTRYPOINT [ "python3" ]
+ENTRYPOINT [ "flask" ]
 
 # CMD: 컨테이너 시작 시 실행되는 명령어로 위 ENTRYPOINT 명령어 뒤 인자로 실행하게 된다. 
 # 결국 python app.py 명령어 실행 
-CMD [ "app.py" ]
+CMD [ "run" ]
