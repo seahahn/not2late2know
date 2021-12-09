@@ -16,7 +16,7 @@ WORKDIR /app
 # RUN: 명령어 실행. 복사된 requirements.txt 파일로 pip로 필요 라이브러리 설치 
 RUN pip install -r requirements.txt
 
-WORKDIR /app/dnd_app
+WORKDIR /app/not2late2know
 
 # flask 실행 위한 환경변수 설정
 # ENV FLASK_APP='dnd_app' \
