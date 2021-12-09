@@ -1,1 +1,1 @@
-web: gunicorn --workers=2 'dnd_app:create_app()'
+web: gunicorn --workers=2 'not2late2know:create_app()'
