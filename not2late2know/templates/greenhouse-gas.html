@@ -1,0 +1,210 @@
+{% extends "index.html" %}
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% block title %}Greenhouse Gas{% endblock %}
+		{% block head %}
+			{{ super() }}
+		{% endblock %}
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+				{% block header_class %}
+					<header id="header" class="alt style2">
+				{% endblock %}
+				{% block header %}
+					{{ super() }}
+				{% endblock %}
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+				{% block banner %}
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="static/images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>온실 가스 (Greenhouse Gas)</h1>
+							</header>
+							<div class="content">
+								<p>Lorem ipsum dolor sit amet nullam consequat<br />
+								sed veroeros. tempus adipiscing nulla.</p>
+							</div>
+						</div>
+					</section>
+				{% endblock %}
+
+				<!-- Main -->
+					<div id="main">
+						{% block main %}
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h2>온실 가스의 문제</h2>
+									</header>
+									<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna.</p>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two" class="spotlights">
+								<section class="align-items-center" style="min-height: 500px;">
+									<div class="chart-container col h-100">
+										<canvas id="co2_chart"></canvas>
+									</div>
+
+									<div class="content col">
+										<div class="inner">
+											<header class="major" height="100%" width="auto">
+												<h3>Orci maecenas</h3>
+											</header>
+											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<ul class="actions">
+												<li><a href="generic.html" class="button">Learn more</a></li>
+											</ul>
+										</div>
+									</div>
+								</section>
+								<section class="align-items-center" style="min-height: 500px;">
+									<div class="chart-container col h-100">
+										<canvas id="methane_chart"></canvas>
+									</div>
+									<div class="content">
+										<div class="inner">
+											<header class="major">
+												<h3>Rhoncus magna</h3>
+											</header>
+											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<ul class="actions">
+												<li><a href="generic.html" class="button">Learn more</a></li>
+											</ul>
+										</div>
+									</div>
+								</section>
+								<section class="align-items-center" style="min-height: 500px;">
+									<div class="chart-container col h-100">
+										<canvas id="nitrous_chart"></canvas>
+									</div>
+									<div class="content">
+										<div class="inner">
+											<header class="major">
+												<h3>Sed nunc ligula</h3>
+											</header>
+											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<ul class="actions">
+												<li><a href="generic.html" class="button">Learn more</a></li>
+											</ul>
+										</div>
+									</div>
+								</section>
+							</section>
+						{% endblock %}
+					</div>
+
+				<!-- Contact -->
+				{% block footer %}
+					{{ super() }}
+				{% endblock%}
+			</div>
+
+		<!-- Scripts -->
+		{% block scripts %}
+			{{ super() }}
+			<script type="text/javascript">
+				var co2 = JSON.parse({{ co2|tojson }});
+				var methane = JSON.parse({{ methane|tojson }});
+				var nitrous = JSON.parse({{ nitrous|tojson }});
+
+				var times_co2 = Object.values(co2.time);
+				var co2s = Object.values(co2.co2);
+				var times_methane = Object.values(co2.time);
+				var methanes = Object.values(co2.co2);
+				var times_nitrous = Object.values(co2.time);
+				var nitrouses = Object.values(co2.co2);
+
+				labels = ['이산화탄소', '메탄', '아산화질소'];
+				titles = ['이산화탄소 변화 추세', '메탄 변화 추세', '아산화질소 변화 추세'];
+				colors = ['#4984B8', '#A75E09', '#FAFCFA'];
+				ids = ['co2_chart', 'methane_chart', 'nitrous_chart'];
+
+				function setChart(times, trend, label, title, color, id) {
+					const data = {
+						labels: times,
+						datasets: [
+							{
+								label: label,
+								data: trend,
+								borderColor: color,
+								borderWidth: 1,
+								backgroundColor: '#FFFFFF',
+								radius: 2,
+								pointStyle: 'circle'
+							}
+						]
+					};
+
+					const config = {
+						type: 'line',
+						data: data,
+						options: {
+						responsive: true,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+							position: 'top',
+							},
+							title: {
+							display: true,
+							text: title
+							}
+						}
+						},
+					};
+
+					const ctx = document.getElementById(id);
+					const chart = new Chart(ctx, config)
+				}
+
+				setChart(times_co2, co2s, labels[0], titles[0], colors[0], ids[0]);
+				setChart(times_methane, methanes, labels[1], titles[1], colors[1], ids[1]);
+				setChart(times_nitrous, nitrouses, labels[2], titles[2], colors[2], ids[2]);
+
+				// const ctx_co2 = document.getElementById('co2_chart');
+				// const co2_chart = new Chart(ctx_co2, config)
+				// const ctx_methane = document.getElementById('methane_chart');
+				// const methane_chart = new Chart(ctx_methane, config)
+				// const ctx_nitrous = document.getElementById('nitrous_chart');
+				// const nitrous_chart = new Chart(ctx_nitrous, config)
+			</script>
+		{% endblock %}
+
+	</body>
+</html>

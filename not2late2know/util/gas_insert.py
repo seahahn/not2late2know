@@ -32,8 +32,8 @@ def co2_insert():
     co2 = response['trend']
     row = (year, month, day, co2) # 삽입할 데이터 행 만들기
 
-    insert_query = "INSERT INTO co2_test (year, month, day, co2) VALUES {};".format(row)
-    select_query = "SELECT * FROM co2_test WHERE year = {} AND month = {} AND day = {}".format(row[0], row[1], row[2])
+    insert_query = "INSERT INTO co2 (year, month, day, co2) VALUES {};".format(row)
+    select_query = "SELECT * FROM co2 WHERE year = {} AND month = {} AND day = {}".format(row[0], row[1], row[2])
 
     # 동일한 년, 월의 데이터가 있는지 확인
     result = exec_select(select_query)
@@ -80,8 +80,8 @@ def nitrous_insert():
     nitrous = response['trend']
     row = (year, month, nitrous) # 삽입할 데이터 행 만들기
 
-    insert_query = "INSERT INTO nitrous_test (year, month, nitrous) VALUES {};".format(row)
-    select_query = "SELECT * FROM nitrous_test WHERE year = {} AND month = {}".format(row[0], row[1])
+    insert_query = "INSERT INTO nitrous (year, month, nitrous) VALUES {};".format(row)
+    select_query = "SELECT * FROM nitrous WHERE year = {} AND month = {}".format(row[0], row[1])
 
     # 동일한 년, 월의 데이터가 있는지 확인
     result = exec_select(select_query)

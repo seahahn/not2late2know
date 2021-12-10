@@ -51,7 +51,7 @@ def temp_insert():
     row = str((_date[0], _date[1], _date[2], response['avgTa'], response['minTa'], response['maxTa']))
     # print(f'job : {time.strftime("%H:%M:%S")}')
 
-    query = """INSERT INTO temp_test
+    query = """INSERT INTO temp
                 ("year", "month", "day", "avgtmp", "mintmp", "maxtmp")
                 VALUES {};""".format(row)
 
@@ -72,8 +72,8 @@ def global_temp_insert():
     _date = response['time'].split(".") # 년 그리고 월 자리의 문자로 나누기
     row = (_date[0], month_map[_date[1]], response['station']) # 삽입할 데이터 행 만들기
 
-    insert_query = "INSERT INTO global_temp_test (year, month, tmp) VALUES {};".format(row)
-    select_query = "SELECT * FROM global_temp_test WHERE year = {} AND month = {}".format(row[0], row[1])
+    insert_query = "INSERT INTO global_temp (year, month, tmp) VALUES {};".format(row)
+    select_query = "SELECT * FROM global_temp WHERE year = {} AND month = {}".format(row[0], row[1])
 
     # 동일한 년, 월의 데이터가 있는지 확인
     result = exec_select(select_query)

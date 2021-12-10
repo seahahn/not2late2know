@@ -1,0 +1,14 @@
+{
+  "name": "webgl-sea-level",
+  "dependencies": {
+    "chartjs-plugin-zoom": "^1.2.0",
+    "ol": "^6.9.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.1"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build --public-url . index.html"
+  }
+}

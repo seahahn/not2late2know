@@ -1,0 +1,133 @@
+{% extends "index.html" %}
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% block title %}Sea Ice{% endblock %}
+		{% block head %}
+			{{ super() }}
+		{% endblock %}
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				{% block header_class %}
+					<header id="header">
+				{% endblock %}
+				{% block header %}
+					{{ super() }}
+				{% endblock %}
+
+				{% block banner %}{% endblock %}
+
+				<!-- Main -->
+					<div id="main" class="alt">
+						{% block main %}
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>해빙 (Sea Ice)</h1>
+									</header>
+									<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
+									<canvas id="ice_chart"></canvas>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+								</div>
+							</section>
+							<iframe width="100%" style="display:block; height: 100vh" src="https://livingatlas.arcgis.com/sea-ice/">
+							</iframe>
+							<span class="text-secondary">Source from : <a href="https://livingatlas.arcgis.com/sea-ice/">https://livingatlas.arcgis.com/sea-ice/</a></span>
+							{% endblock %}
+					</div>
+
+				<!-- Contact -->
+				{% block footer %}
+					{{ super() }}
+				{% endblock%}
+
+			</div>
+
+		<!-- Scripts -->
+		{% block scripts %}
+			{{ super() }}
+			<script type="text/javascript">
+				var sea_ice = JSON.parse({{ sea_ice|tojson }});
+
+				var year = Object.values(sea_ice.year);
+				var extent = Object.values(sea_ice.extent);
+				var area = Object.values(sea_ice.area);
+
+				const data = {
+					labels: year,
+					datasets: [
+						{
+							label: 'Sea Ice Extent',
+							data: extent,
+							borderColor: '#2C82C9',
+							borderWidth: 1,
+							backgroundColor: '#2C82C9',
+							radius: 2,
+							pointStyle: 'circle'
+						},
+						{
+							label: 'Sea Ice Area',
+							data: area,
+							borderColor: '#89C4F4',
+							borderWidth: 1,
+							backgroundColor: '#89C4F4',
+							radius: 2,
+							pointStyle: 'circle'
+						}
+					]
+				};
+
+				const config = {
+					type: 'line',
+					data: data,
+					options: {
+					  responsive: true,
+					  plugins: {
+						zoom: {
+							pan: {
+								enabled: true,
+								mode: 'xy',
+								overScaleMode: 'y'
+							},
+							zoom: {
+								wheel: {
+									enabled: true,
+								},
+								pinch: {
+									enabled: true,
+								},
+								mode: 'xy',
+								overScaleMode: 'y'
+							}
+						},
+						legend: {
+						  position: 'top',
+						},
+						title: {
+						  display: true,
+						  text: 'The Trend of Sea Ice Caps'
+						}
+					  }
+					},
+				  };
+
+				const ctx = document.getElementById('ice_chart');
+				const ice_chart = new Chart(ctx, config)
+			</script>
+		{% endblock %}
+
+	</body>
+</html>

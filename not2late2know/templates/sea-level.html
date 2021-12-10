@@ -1,0 +1,155 @@
+{% extends "index.html" %}
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% block title %}Sea Level{% endblock %}
+		{% block head %}
+			{{ super() }}
+			<style>
+				.map {
+				  width: 100%;
+				  height:400px;
+				}
+				#level {
+				  display: inline-block;
+				  width: 150px;
+				  vertical-align: text-bottom;
+				}
+		  
+				a.location {
+				  cursor: pointer;
+				}
+		  
+				#map {
+				  background: #8bd4ff;
+				}
+			  </style>
+		{% endblock %}
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				{% block header_class %}
+					<header id="header">
+				{% endblock %}
+				{% block header %}
+					{{ super() }}
+				{% endblock %}
+
+				{% block banner %}{% endblock %}
+
+				<!-- Main -->
+					<div id="main" class="alt">
+						{% block main %}
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>해수면 높이 (Sea Level)</h1>
+									</header>
+									<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
+									<canvas id="sea_level_chart"></canvas>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+								</div>
+							</section>
+							<!--<iframe width="100%" style="display:block; height: 100vh" src="https://livingatlas.arcgis.com/sea-ice/">
+							</iframe>
+							<span class="text-secondary">Source from : <a href="https://livingatlas.arcgis.com/sea-ice/">https://livingatlas.arcgis.com/sea-ice/</a></span>-->
+							<div id="map" class="map"></div>
+							<label>
+								Sea level
+								<input id="level" type="range" min="0" max="100" value="1"/>
+								+<span id="output"></span> m
+							  </label>
+							  <br>
+							  Go to
+							  <a class="location" data-center="-122.3267,37.8377" data-zoom="11">San Francisco</a>,
+							  <a class="location" data-center="-73.9338,40.6861" data-zoom="11">New York</a>,
+							  <a class="location" data-center="72.9481,18.9929" data-zoom="11">Mumbai</a>, or
+							  <a class="location" data-center="120.831,31.160" data-zoom="9">Shanghai</a>
+							{% endblock %}
+					</div>
+
+				<!-- Contact -->
+				{% block footer %}
+					{{ super() }}
+				{% endblock%}
+
+			</div>
+
+		<!-- Scripts -->
+		{% block scripts %}
+			{{ super() }}
+			<script type="text/javascript">
+				var sea_level = JSON.parse({{ sea_level|tojson }});
+
+				var year = Object.values(sea_level.year);
+				var level = Object.values(sea_level.level);
+
+				const data = {
+					labels: year,
+					datasets: [
+						{
+							label: 'Sea Level',
+							data: level,
+							borderColor: '#76A9B9',
+							borderWidth: 1,
+							backgroundColor: '#76A9B9',
+							radius: 2,
+							pointStyle: 'circle'
+						}
+					]
+				};
+
+				const config = {
+					type: 'line',
+					data: data,
+					options: {
+					  responsive: true,
+					  plugins: {
+						zoom: {
+							pan: {
+								enabled: true,
+								mode: 'xy',
+								overScaleMode: 'y'
+							},
+							zoom: {
+								wheel: {
+									enabled: true,
+								},
+								pinch: {
+									enabled: true,
+								},
+								mode: 'xy',
+								overScaleMode: 'y'
+							}
+						},
+						legend: {
+						  position: 'top',
+						},
+						title: {
+						  display: true,
+						  text: 'The Trend of Sea Level'
+						}
+					  }
+					},
+				  };
+
+				const ctx = document.getElementById('sea_level_chart');
+				const sea_level_chart = new Chart(ctx, config)
+			</script>
+			<script src="static/assets/js/webgl-sea-level.js"></script>
+		{% endblock %}
+
+	</body>
+</html>
