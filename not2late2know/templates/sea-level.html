@@ -10,6 +10,7 @@
 		{% block title %}Sea Level{% endblock %}
 		{% block head %}
 			{{ super() }}
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/css/ol.css" type="text/css">
 			<style>
 				.map {
 				  width: 100%;
@@ -65,18 +66,6 @@
 							<!--<iframe width="100%" style="display:block; height: 100vh" src="https://livingatlas.arcgis.com/sea-ice/">
 							</iframe>
 							<span class="text-secondary">Source from : <a href="https://livingatlas.arcgis.com/sea-ice/">https://livingatlas.arcgis.com/sea-ice/</a></span>-->
-							<div id="map" class="map"></div>
-							<label>
-								Sea level
-								<input id="level" type="range" min="0" max="100" value="1"/>
-								+<span id="output"></span> m
-							  </label>
-							  <br>
-							  Go to
-							  <a class="location" data-center="-122.3267,37.8377" data-zoom="11">San Francisco</a>,
-							  <a class="location" data-center="-73.9338,40.6861" data-zoom="11">New York</a>,
-							  <a class="location" data-center="72.9481,18.9929" data-zoom="11">Mumbai</a>, or
-							  <a class="location" data-center="120.831,31.160" data-zoom="9">Shanghai</a>
 							{% endblock %}
 					</div>
 
@@ -148,7 +137,6 @@
 				const ctx = document.getElementById('sea_level_chart');
 				const sea_level_chart = new Chart(ctx, config)
 			</script>
-			<script src="static/assets/js/webgl-sea-level.js"></script>
 		{% endblock %}
 
 	</body>
