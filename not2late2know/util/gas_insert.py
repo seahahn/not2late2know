@@ -20,8 +20,8 @@ scheduler = BackgroundScheduler(timezone=utc)
 
 # 이산화탄소 데이터 스케줄러 함수
 # 1시간(매 시간의 3분)마다 실행
-# @scheduler.scheduled_job('interval', seconds=5)
-@scheduler.scheduled_job('cron', minute='3')
+@scheduler.scheduled_job('interval', seconds=5)
+# @scheduler.scheduled_job('cron', minute='3')
 def co2_insert():
     # 요청 URL 전송 및 데이터 불러오기
     response = requests.get(url='https://global-warming.org/api/co2-api').json()['co2'][-1]
@@ -41,11 +41,14 @@ def co2_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
+        print("inserting executed co2_insert")
+        
+    print("executed co2_insert")
 
 # 메탄 데이터 스케줄러 함수
 # 매일 0시 5분에 실행
-# @scheduler.scheduled_job('interval', seconds=5)
-@scheduler.scheduled_job('cron', hour='0', minute='5')
+@scheduler.scheduled_job('interval', seconds=5)
+# @scheduler.scheduled_job('cron', hour='0', minute='5')
 def methane_insert():
     # 요청 URL 전송 및 데이터 불러오기
     response = requests.get(url='https://global-warming.org/api/methane-api').json()['methane'][-1]
@@ -65,11 +68,14 @@ def methane_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
+        print("inserting executed methane_insert")
+
+    print("executed methane_insert")
 
 # 아산화질소 데이터 스케줄러 함수
 # 매일 0시 10분에 실행
-# @scheduler.scheduled_job('interval', seconds=5)
-@scheduler.scheduled_job('cron', hour='0', minute='10')
+@scheduler.scheduled_job('interval', seconds=5)
+# @scheduler.scheduled_job('cron', hour='0', minute='10')
 def nitrous_insert():
     # 요청 URL 전송 및 데이터 불러오기
     response = requests.get(url='https://global-warming.org/api/nitrous-oxide-api').json()['nitrous'][-1]
@@ -89,6 +95,9 @@ def nitrous_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
+        print("inserting executed nitrous_insert")
+
+    print("executed nitrous_insert")
 
 # 스케줄러 수행 시작
 scheduler.start()

@@ -17,8 +17,8 @@ scheduler = BackgroundScheduler(timezone=utc)
 
 # 북극 해빙 면적 데이터 스케줄러 함수
 # 매일 1시에 실행
-# @scheduler.scheduled_job('interval', seconds=5)
-@scheduler.scheduled_job('cron', hour='1')
+@scheduler.scheduled_job('interval', seconds=5)
+# @scheduler.scheduled_job('cron', hour='1')
 def sea_ice_insert():
     # 요청 URL 전송 및 데이터 불러오기
     response = requests.get(url='https://global-warming.org/api/arctic-api').json()['result'][-1]
@@ -28,8 +28,8 @@ def sea_ice_insert():
     area = response['area']
     row = (year, extent, area) # 삽입할 데이터 행 만들기
 
-    insert_query = "INSERT INTO sea_ice_test (year, extent, area) VALUES {};".format(row)
-    select_query = "SELECT * FROM sea_ice_test WHERE year = {}".format(row[0])
+    insert_query = "INSERT INTO sea_ice (year, extent, area) VALUES {};".format(row)
+    select_query = "SELECT * FROM sea_ice WHERE year = {}".format(row[0])
 
     # 동일한 년, 월의 데이터가 있는지 확인
     result = exec_select(select_query)
@@ -37,6 +37,9 @@ def sea_ice_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
+        print("inserting executed sea_ice_insert")
+        
+    print("executed sea_ice_insert")
 
 # 스케줄러 수행 시작
 scheduler.start()

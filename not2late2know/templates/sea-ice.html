@@ -38,9 +38,18 @@
 									</header>
 									<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
 									<canvas id="ice_chart"></canvas>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+									<p>북극의 해빙 면적은 1979년 위성 측정이 시작된 이후 모든 달 동안 크게 감소했으며, 9월마다 가장 큰 폭의 감소세를 보였습니다. <br>마지막 15개년은 가장 낮은 값을 보여줍니다.</p>
+									<p>북극은 지구 평균보다 약 두 배 빠르게 따뜻해지고 있습니다. 그 이유 중 일부는 다음과 같습니다:<br>
+										<a href="https://en.wikipedia.org/wiki/Polar_amplification">북극의 증폭 현상(Polar Amplification)</a>, <a href="https://terms.naver.com/entry.naver?docId=1212344&cid=40942&categoryId=32299">알베도 효과(Albedo Effect)</a>, 
+										그리고 <a href="https://ko.wikipedia.org/wiki/%EC%B9%B4%EB%B3%B8_%EB%B8%94%EB%9E%99">블랙 카본</a>.<br>
+										1979년부터 1996년까지 북극 해빙 면적의 2.2 ~ 3%를 잃었습니다. 그리고 2010년부터 현재까지 우리는 10년마다 12.85%의 해빙을 잃고 있습니다!
+									</p>
+									<p>또한 영구 동토층이 녹아내리고 있습니다. 이로 인해 많은 양의 메탄이 대기로 방출되고, 이는 지구 온난화의 과정을 더 부채질하고 있습니다.</p>
+									<p class="mb-0">[참고 자료]</p>
+									<ul>
+										<li><a href="https://climate.nasa.gov/vital-signs/arctic-sea-ice/">NASA - Global Climate Change (Arctic Sea Ice Extent)</a></li>
+										<li><a href="https://global-warming.org/">Global Warming live graphs and API</a></li>
+									</ul>
 								</div>
 							</section>
 							<iframe width="100%" style="display:block; height: 100vh" src="https://livingatlas.arcgis.com/sea-ice/">
@@ -70,7 +79,7 @@
 					labels: year,
 					datasets: [
 						{
-							label: 'Sea Ice Extent',
+							label: '북극 해빙 면적',
 							data: extent,
 							borderColor: '#2C82C9',
 							borderWidth: 1,
@@ -79,7 +88,7 @@
 							pointStyle: 'circle'
 						},
 						{
-							label: 'Sea Ice Area',
+							label: '영구 동토층 면적',
 							data: area,
 							borderColor: '#89C4F4',
 							borderWidth: 1,
@@ -94,35 +103,70 @@
 					type: 'line',
 					data: data,
 					options: {
-					  responsive: true,
-					  plugins: {
-						zoom: {
-							pan: {
-								enabled: true,
-								mode: 'xy',
-								overScaleMode: 'y'
+						scales: {
+							yAxes: {
+								title: {
+									display: true,
+									text: "백만 평방 킬로미터 (Million square km)",
+									font: {
+										size: 15
+									},
+									color: '#ffffff'
+								},
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
 							},
-							zoom: {
-								wheel: {
-									enabled: true,
-								},
-								pinch: {
-									enabled: true,
-								},
-								mode: 'xy',
-								overScaleMode: 'y'
+							xAxes: {
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
 							}
 						},
-						legend: {
-						  position: 'top',
-						},
-						title: {
-						  display: true,
-						  text: 'The Trend of Sea Ice Caps'
+						responsive: true,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: "#ffffff"
+								}
+							},
+							title: {
+								display: true,
+								text: '북극 해빙과 영구 동토층 면적의 변화',
+								font: {
+									size: 20,
+								},
+								color: '#ffffff'
+							}
 						}
-					  }
 					},
-				  };
+				};
 
 				const ctx = document.getElementById('ice_chart');
 				const ice_chart = new Chart(ctx, config)

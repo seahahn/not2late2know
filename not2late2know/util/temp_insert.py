@@ -27,8 +27,8 @@ scheduler = BackgroundScheduler(timezone=utc)
 
 # 서울 기온 데이터 스케줄러 함수
 # 매일 오전 11시 30분에 실행
-# @scheduler.scheduled_job('interval', seconds=5)
-@scheduler.scheduled_job('cron', hour='11', minute='10')
+@scheduler.scheduled_job('interval', seconds=5)
+# @scheduler.scheduled_job('cron', hour='11', minute='10')
 def temp_insert():
     # 요청 URL과 오퍼레이션
     URL = 'http://apis.data.go.kr/1360000/AsosDalyInfoService'
@@ -37,31 +37,39 @@ def temp_insert():
     PARAMS = {'dataType': 'JSON',
                 'dataCd': 'ASOS',
                 'dateCd': 'DAY',
-                'startDt': str(date.today()-timedelta(days = 1)).replace("-", ""), # 어제 날짜의 기온 데이터 조회
+                'startDt': str(date.today()-timedelta(days = 3)).replace("-", ""), # 3일 전 날짜부터 어제 날짜까지의 기온 데이터 조회
                 'endDt': str(date.today()-timedelta(days = 1)).replace("-", ""),
                 'stnIds': 108}
     request_query = get_request_query(URL, OPERATION, PARAMS, SERVICEKEY)
 
-    # 요청 URL 전송 및 데이터 불러오기
-    response = requests.get(url=request_query).json()['response']['body']['items']['item'][0]
+    try:
+        # 요청 URL 전송 및 데이터 불러오기
+        responses = requests.get(url=request_query).json()['response']['body']['items']['item']
 
-    _date = response['tm'].split("-") # 년, 월, 일로 나누기
+        for i, response in enumerate(responses):
+            _date = response['tm'].split("-") # 년, 월, 일로 나누기
 
-    # 삽입할 데이터 행 만들기
-    row = str((_date[0], _date[1], _date[2], response['avgTa'], response['minTa'], response['maxTa']))
-    # print(f'job : {time.strftime("%H:%M:%S")}')
+            # 삽입할 데이터 행 만들기
+            row = (_date[0], _date[1], _date[2], response['avgTa'], response['minTa'], response['maxTa'])
 
-    query = """INSERT INTO temp
-                ("year", "month", "day", "avgtmp", "mintmp", "maxtmp")
-                VALUES {};""".format(row)
+            insert_query = "INSERT INTO temp (year, month, day, avgtmp, mintmp, maxtmp) VALUES {};".format(row)
+            select_query = "SELECT * FROM temp WHERE year = {} AND month = {} AND day = {}".format(row[0], row[1], row[2])
 
-    # DB에 삽입
-    exec_insert(query)
+            # 동일한 년, 월의 데이터가 있는지 확인
+            result = exec_select(select_query)
+
+            if len(result) == 0:
+                exec_insert(insert_query)
+                print("inserting executed global_temp_insert")
+
+        print("executed temp_insert")
+    except Exception as e:
+        print(e)
 
 # 세계 평균 기온 데이터 스케줄러 함수
 # 매일 0시에 실행
-# @scheduler.scheduled_job('interval', seconds=5)
-@scheduler.scheduled_job('cron', hour='0')
+@scheduler.scheduled_job('interval', seconds=5)
+# @scheduler.scheduled_job('cron', hour='0')
 def global_temp_insert():
     # 요청 URL 전송 및 데이터 불러오기
     response = requests.get(url='https://global-warming.org/api/temperature-api').json()['result'][-1]
@@ -81,6 +89,9 @@ def global_temp_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
+        print("inserting executed global_temp_insert")
+
+    print("executed global_temp_insert")
 
 # 스케줄러 수행 시작
 scheduler.start()

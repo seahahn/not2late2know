@@ -1,0 +1,486 @@
+{% extends "index.html" %}
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% block title %}Global Temperature{% endblock %}
+		{% block head %}
+			{{ super() }}
+		{% endblock %}
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				{% block header_class %}
+					<header id="header">
+				{% endblock %}
+				{% block header %}
+					{{ super() }}
+				{% endblock %}
+
+				{% block banner %}{% endblock %}
+
+				<!-- Main -->
+					<div id="main" class="alt">
+						{% block main %}
+						<!-- One -->
+						<div class="container py-5">
+							<header class="major">
+								<h2>기후 변화 흐름 요약 (Summary Dashboard of Climate Change)</h2>
+							</header>
+							<div class="row py-3">
+								<div class="col">
+									<canvas class="col" id="gbtmp_chart" style="height:70vh; width:40vw"></canvas>
+								</div>
+								<div class="col">
+									<canvas class="col" id="co2_chart" style="height:70vh; width:40vw"></canvas>
+								</div>
+							</div>
+							<div class="row py-3">
+								<div class="col">
+									<canvas class="col" id="methane_chart" style="height:70vh; width:40vw"></canvas>
+								</div>
+								<div class="col">
+									<canvas class="col" id="nitrous_chart" style="height:70vh; width:40vw"></canvas>
+								</div>
+							</div>
+							<div class="row py-3">
+								<div class="col">
+									<canvas class="col" id="ice_chart" style="height:70vh; width:40vw"></canvas>
+								</div>
+								<div class="col">
+									<canvas class="col" id="sea_level_chart" style="height:70vh; width:40vw"></canvas>
+								</div>
+							</div>
+						</div>
+
+						{% endblock %}
+					</div>
+
+				<!-- Contact -->
+				{% block footer %}
+					{{ super() }}
+				{% endblock%}
+
+			</div>
+
+		<!-- Scripts -->
+		{% block scripts %}
+			{{ super() }}
+			<!-- 세계 평균 기온 차트 -->
+			<script type="text/javascript">
+				var gbtemp = JSON.parse({{ gbtemp|tojson }});
+
+				var times = Object.values(gbtemp.time);
+				var temps = Object.values(gbtemp.tmp);
+
+				const data = {
+					labels: times,
+					datasets: [
+						{
+							label: '세계 평균 온도',
+							data: temps,
+							borderColor: '#FF6384',
+							borderWidth: 1,
+							backgroundColor: '#FFFFFF',
+							radius: 1,
+							pointStyle: 'circle'
+						}
+					]
+				};
+
+				const config = {
+					type: 'line',
+					data: data,
+					options: {
+						scales: {
+							yAxes: {
+								title: {
+									display: true,
+									text: "온도 (°C)",
+									font: {
+										size: 15
+									},
+									color: '#ffffff'
+								},
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
+							},
+							xAxes: {
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
+							}
+						},
+						responsive: false,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: "#ffffff"
+								}
+							},
+							title: {
+								display: true,
+								text: '세계 온도 기록의 변화',
+								font: {
+									size: 20,
+								},
+								color: '#ffffff'
+							}
+						}
+					}
+				};
+
+				const ctx = document.getElementById('gbtmp_chart');
+				const gbtmp_chart = new Chart(ctx, config)
+			</script>
+			<!-- 온실 가스 차트 -->
+			<script type="text/javascript">
+				var co2 = JSON.parse({{ co2|tojson }});
+				var methane = JSON.parse({{ methane|tojson }});
+				var nitrous = JSON.parse({{ nitrous|tojson }});
+
+				var times_co2 = Object.values(co2.time);
+				var co2s = Object.values(co2.co2);
+				var times_methane = Object.values(methane.time);
+				var methanes = Object.values(methane.methane);
+				var times_nitrous = Object.values(nitrous.time);
+				var nitrouses = Object.values(nitrous.nitrous);
+
+				times = [times_co2, times_methane, times_nitrous];
+				datasets = [co2s, methanes, nitrouses];
+				labels = ['이산화탄소', '메탄', '아산화질소'];
+				titles = ['이산화탄소 변화 추세', '메탄 변화 추세', '아산화질소 변화 추세'];
+				colors = ['#4984B8', '#A75E09', '#FDB147'];
+				ids = ['co2_chart', 'methane_chart', 'nitrous_chart'];
+				y_titles = ['Parts Per Million(ppm)', 'Parts Per Million(ppm)', 'Mole Fraction (ppb)'];
+
+				function setChart(times, trend, label, title, color, id, y_title) {
+					const data = {
+						labels: times,
+						datasets: [
+							{
+								label: label,
+								data: trend,
+								borderColor: color,
+								borderWidth: 1,
+								backgroundColor: color,
+								radius: 2,
+								pointStyle: 'circle'
+							}
+						]
+					};
+
+					const config = {
+						type: 'line',
+						data: data,
+						options: {
+							scales: {
+								yAxes: {
+									title: {
+										display: true,
+										text: y_title,
+										font: {
+											size: 11
+										},
+										color: '#ffffff'
+									},
+									ticks: {
+										display: true,
+										font: {
+											size: 11,
+										},
+										color: '#ffffff'
+									}
+								},
+								xAxes: {
+									ticks: {
+										display: true,
+										font: {
+											size: 11,
+										},
+										color: '#ffffff'
+									}
+								}
+							},
+							responsive: false,
+							plugins: {
+								zoom: {
+									pan: {
+										enabled: true,
+										mode: 'xy',
+										overScaleMode: 'y'
+									},
+									zoom: {
+										wheel: {
+											enabled: true,
+										},
+										pinch: {
+											enabled: true,
+										},
+										mode: 'xy',
+										overScaleMode: 'y'
+									}
+								},
+								legend: {
+									position: 'top',
+									labels: {
+										color: "#ffffff"
+									}
+								},
+								title: {
+									display: true,
+									text: title,
+									font: {
+										size: 20,
+									},
+									color: '#ffffff'
+								}
+							}
+						},
+					};
+
+					const ctx = document.getElementById(id);
+					const chart = new Chart(ctx, config)
+				}
+
+				for (let i = 0; i < times.length; i++) {
+					setChart(times[i], datasets[i], labels[i], titles[i], colors[i], ids[i], y_titles[i]);
+				}
+			</script>
+			<!-- 북극 해빙 차트 -->
+			<script type="text/javascript">
+				var sea_ice = JSON.parse({{ sea_ice|tojson }});
+
+				var year = Object.values(sea_ice.year);
+				var extent = Object.values(sea_ice.extent);
+				var area = Object.values(sea_ice.area);
+
+				const data_sea_ice = {
+					labels: year,
+					datasets: [
+						{
+							label: '북극 해빙 면적',
+							data: extent,
+							borderColor: '#2C82C9',
+							borderWidth: 1,
+							backgroundColor: '#2C82C9',
+							radius: 2,
+							pointStyle: 'circle'
+						},
+						{
+							label: '영구 동토층 면적',
+							data: area,
+							borderColor: '#89C4F4',
+							borderWidth: 1,
+							backgroundColor: '#89C4F4',
+							radius: 2,
+							pointStyle: 'circle'
+						}
+					]
+				};
+
+				const config_sea_ice = {
+					type: 'line',
+					data: data_sea_ice,
+					options: {
+						scales: {
+							yAxes: {
+								title: {
+									display: true,
+									text: "백만 평방 킬로미터 (Million square km)",
+									font: {
+										size: 15
+									},
+									color: '#ffffff'
+								},
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
+							},
+							xAxes: {
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
+							}
+						},
+						responsive: false,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: "#ffffff"
+								}
+							},
+							title: {
+								display: true,
+								text: '북극 해빙과 영구 동토층 면적의 변화',
+								font: {
+									size: 20,
+								},
+								color: '#ffffff'
+							}
+						}
+					},
+				};
+
+				const ctx_sea_ice = document.getElementById('ice_chart');
+				const ice_chart = new Chart(ctx_sea_ice, config_sea_ice)
+			</script>
+			<!-- 해수면 높이 차트 -->
+			<script type="text/javascript">
+				var sea_level = JSON.parse({{ sea_level|tojson }});
+
+				var year = Object.values(sea_level.year);
+				var level = Object.values(sea_level.level);
+
+				const data_sea_level = {
+					labels: year,
+					datasets: [
+						{
+							label: '해수면 높이',
+							data: level,
+							borderColor: '#76A9B9',
+							borderWidth: 1,
+							backgroundColor: '#76A9B9',
+							radius: 2,
+							pointStyle: 'circle'
+						}
+					]
+				};
+
+				const config_sea_level = {
+					type: 'line',
+					data: data_sea_level,
+					options: {
+						scales: {
+							yAxes: {
+								title: {
+									display: true,
+									text: "해수면 높이 변화 (mm)",
+									font: {
+										size: 15
+									},
+									color: '#ffffff'
+								},
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
+							},
+							xAxes: {
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
+							}
+						},
+						responsive: false,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: "#ffffff"
+								}
+							},
+							title: {
+								display: true,
+								text: '해수면 높이의 변화(1880년도 기준)',
+								font: {
+									size: 20,
+								},
+								color: '#ffffff'
+							}
+						}
+					},
+				};
+
+				const ctx_sea_level = document.getElementById('sea_level_chart');
+				const sea_level_chart = new Chart(ctx_sea_level, config_sea_level)
+			</script>
+		{% endblock %}
+
+	</body>
+</html>

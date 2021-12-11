@@ -38,8 +38,8 @@
 								<h1>온실 가스 (Greenhouse Gas)</h1>
 							</header>
 							<div class="content">
-								<p>Lorem ipsum dolor sit amet nullam consequat<br />
-								sed veroeros. tempus adipiscing nulla.</p>
+								<p>지구를 적당히 따뜻하게,<br/>
+								그러나 지금은 너무 따뜻하게 만드는 주요 원인</p>
 							</div>
 						</div>
 					</section>
@@ -54,7 +54,10 @@
 									<header class="major">
 										<h2>온실 가스의 문제</h2>
 									</header>
-									<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna.</p>
+									<p>온실 가스는 지구의 기온을 적정 수준으로 유지시키는 역할을 합니다.<br/>
+									그러나 산업화 이후 인간의 활동으로 인하여 이산화탄소 및 여러 종류의 온실 가스 농도가 지속적으로 증가하였고, 이는 지구의 온도를 상승시키는 주요 원인입니다.</p>
+									<p>온실 효과를 일으키는 기체들 중 이산화탄소는 주로 에너지 사용 및 산업 공정에서 발생하고, 메탄은 주로 폐기물과 농축산 분야에서, 아산화질소는 산업 공정과 비료 사용으로 인해 발생됩니다.<br/>
+									이 중에서 이산화탄소가 전체 온실 가스 배출량의 80%를 차지하고 있습니다.</p>
 								</div>
 							</section>
 
@@ -64,16 +67,47 @@
 									<div class="chart-container col h-100">
 										<canvas id="co2_chart"></canvas>
 									</div>
-
 									<div class="content col">
 										<div class="inner">
 											<header class="major" height="100%" width="auto">
-												<h3>Orci maecenas</h3>
+												<h3>이산화탄소 (Carbon Dioxide)</h3>
 											</header>
-											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<p>인간의 활동은 지구 대기의 이산화탄소 수치를 심각하게 증가시켰습니다.</p>
+											<p>수천 년 동안 지구 대기의 자연 농도는 약 280ppm이었습니다. 그러나 산업혁명 초기부터 화석연료 사용과 삼림 벌채, 목축과 같은 인간의 활동은 이 양을 30% 이상 증가시켰습니다.</p>
 											<ul class="actions">
-												<li><a href="generic.html" class="button">Learn more</a></li>
+												<li><a href="https://climate.nasa.gov/vital-signs/carbon-dioxide/" class="button">더 알아보기</a></li>
 											</ul>
+										</div>
+										<div class="inner">
+											<h3>이산화탄소 변화 예측하기</h2>
+											<form class="row align-items-end">
+												<div class="col">
+													<label for="year_co2">년도</label>
+													<input type="number" id="year_co2" class="form-control" aria-label="년도 입력란">
+												</div>
+												<div class="col">
+													<label for="month_co2">월 선택</label>
+													<select class="form-select" id="month_co2" aria-label="월 선택란">
+														<option selected value="">월 선택</option>
+														{% for i in range(12) %}
+														<option value={{ i+1 }}>{{ i+1 }}</option>
+														{% endfor %}
+													</select>
+												</div>
+												<div class="col">
+													<label for="day_co2">일자</label>
+													<input type="number" id="day_co2" class="form-control" aria-label="일자 입력란">
+												</div>
+												<div class="col-auto">
+													<button id="predict_co2" class="predict btn btn-outline-secondary" type="button">예측하기</button>
+												</div>
+											</form>
+											<div class="row">
+												<div class="col">
+													<h4>예측 결과</h4>
+													<p id="result_co2"></p>
+												</div>
+											</div>
 										</div>
 									</div>
 								</section>
@@ -84,12 +118,42 @@
 									<div class="content">
 										<div class="inner">
 											<header class="major">
-												<h3>Rhoncus magna</h3>
+												<h3>메탄 (Methane)</h3>
 											</header>
-											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<p>메탄은 지질학적, 생물학적 과정에 의해 형성되는 가연성 가스입니다.
+												전 세계 메탄 배출량의 50~65%는 인간의 활동에서 발생합니다. 여기에는 목축업, 농업, 석유 및 가스, 가정과 회사에서 나오는 폐기물, 매립지 등이 포함됩니다.
+											</p>
+											<p>메탄은 이산화탄소보다 몇 배나 강한 지구 온난화의 원인입니다. 65만 년 이상 동안 대기 중의 메탄 농도는 350~800 ppb 사이였으나, 산업혁명 초기부터 인간의 활동은 이 양을 약 150% 증가시켰습니다.</p>
 											<ul class="actions">
-												<li><a href="generic.html" class="button">Learn more</a></li>
+												<li><a href="https://www.epa.gov/ghgemissions/overview-greenhouse-gases#methane" class="button">더 알아보기</a></li>
 											</ul>
+										</div>
+										<div class="inner">
+											<h3>메탄 변화 예측하기</h2>
+											<form class="row align-items-end">
+												<div class="col">
+													<label for="year_methane">년도</label>
+													<input type="number" id="year_methane" class="form-control" aria-label="년도 입력란">
+												</div>
+												<div class="col">
+													<label for="month_methane">월 선택</label>
+													<select class="form-select" id="month_methane" aria-label="월 선택란">
+														<option selected value="">월 선택</option>
+														{% for i in range(12) %}
+														<option value={{ i+1 }}>{{ i+1 }}</option>
+														{% endfor %}
+													</select>
+												</div>
+												<div class="col-auto">
+													<button id="predict_methane" class="predict btn btn-outline-secondary" type="button">예측하기</button>
+												</div>
+											</form>
+											<div class="row">
+												<div class="col">
+													<h4>예측 결과</h4>
+													<p id="result_methane"></p>
+												</div>
+											</div>
 										</div>
 									</div>
 								</section>
@@ -100,15 +164,52 @@
 									<div class="content">
 										<div class="inner">
 											<header class="major">
-												<h3>Sed nunc ligula</h3>
+												<h3>아산화질소 (Nitrous Oxide)</h3>
 											</header>
-											<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
+											<p>아산화질소는 화석 연료와 고체 폐기물, 질소 기반 비료, 하수 처리 공장, 자연 공정 및 기타 농업 및 산업 활동에 의해 생성되는 가스입니다.</p>
+											<p>아산화질소는 대기 중에서 3번째로 크게 열을 가둬놓는 가스이며, 인간의 활동으로 방출되는 가장 큰 오존 파괴 화합물입니다.</p>
 											<ul class="actions">
-												<li><a href="generic.html" class="button">Learn more</a></li>
+												<li><a href="https://www.epa.gov/ghgemissions/overview-greenhouse-gases#nitrous-oxide" class="button">더 알아보기</a></li>
 											</ul>
+										</div>
+										<div class="inner">
+											<h3>아산화질소 변화 예측하기</h2>
+											<form class="row align-items-end">
+												<div class="col">
+													<label for="year_nitrous">년도</label>
+													<input type="number" id="year_nitrous" class="form-control" aria-label="년도 입력란">
+												</div>
+												<div class="col">
+													<label for="month_nitrous">월 선택</label>
+													<select class="form-select" id="month_nitrous" aria-label="월 선택란">
+														<option selected value="">월 선택</option>
+														{% for i in range(12) %}
+														<option value={{ i+1 }}>{{ i+1 }}</option>
+														{% endfor %}
+													</select>
+												</div>
+												<div class="col-auto">
+													<button id="predict_nitrous" class="predict btn btn-outline-secondary" type="button">예측하기</button>
+												</div>
+											</form>
+											<div class="row">
+												<div class="col">
+													<h4>예측 결과</h4>
+													<p id="result_nitrous"></p>
+												</div>
+											</div>
 										</div>
 									</div>
 								</section>
+								<div class="m-3 pb-1">
+									<p class="mb-1">[참고 자료]</p>
+									<ul>
+										<li><a href="https://climate.nasa.gov/vital-signs/carbon-dioxide/">NASA - Global Climate Change (Carbon Dioxide)</a></li>
+										<li><a href="https://global-warming.org/">Global Warming live graphs and API</a></li>
+										<li><a href="https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions">CO₂ and Greenhouse Gas Emissions</a></li>
+										<li><a href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data">Global Greenhouse Gas Emissions Data</a></li>
+									</ul>
+								</div>
 							</section>
 						{% endblock %}
 					</div>
@@ -129,17 +230,20 @@
 
 				var times_co2 = Object.values(co2.time);
 				var co2s = Object.values(co2.co2);
-				var times_methane = Object.values(co2.time);
-				var methanes = Object.values(co2.co2);
-				var times_nitrous = Object.values(co2.time);
-				var nitrouses = Object.values(co2.co2);
+				var times_methane = Object.values(methane.time);
+				var methanes = Object.values(methane.methane);
+				var times_nitrous = Object.values(nitrous.time);
+				var nitrouses = Object.values(nitrous.nitrous);
 
+				times = [times_co2, times_methane, times_nitrous];
+				datasets = [co2s, methanes, nitrouses];
 				labels = ['이산화탄소', '메탄', '아산화질소'];
 				titles = ['이산화탄소 변화 추세', '메탄 변화 추세', '아산화질소 변화 추세'];
-				colors = ['#4984B8', '#A75E09', '#FAFCFA'];
+				colors = ['#4984B8', '#A75E09', '#FDB147'];
 				ids = ['co2_chart', 'methane_chart', 'nitrous_chart'];
+				y_titles = ['Parts Per Million(ppm)', 'Parts Per Million(ppm)', 'Mole Fraction (ppb)'];
 
-				function setChart(times, trend, label, title, color, id) {
+				function setChart(times, trend, label, title, color, id, y_title) {
 					const data = {
 						labels: times,
 						datasets: [
@@ -148,7 +252,7 @@
 								data: trend,
 								borderColor: color,
 								borderWidth: 1,
-								backgroundColor: '#FFFFFF',
+								backgroundColor: color,
 								radius: 2,
 								pointStyle: 'circle'
 							}
@@ -159,33 +263,68 @@
 						type: 'line',
 						data: data,
 						options: {
-						responsive: true,
-						plugins: {
-							zoom: {
-								pan: {
-									enabled: true,
-									mode: 'xy',
-									overScaleMode: 'y'
+							scales: {
+								yAxes: {
+									title: {
+										display: true,
+										text: y_title,
+										font: {
+											size: 11
+										},
+										color: '#ffffff'
+									},
+									ticks: {
+										display: true,
+										font: {
+											size: 11,
+										},
+										color: '#ffffff'
+									}
 								},
-								zoom: {
-									wheel: {
-										enabled: true,
-									},
-									pinch: {
-										enabled: true,
-									},
-									mode: 'xy',
-									overScaleMode: 'y'
+								xAxes: {
+									ticks: {
+										display: true,
+										font: {
+											size: 11,
+										},
+										color: '#ffffff'
+									}
 								}
 							},
-							legend: {
-							position: 'top',
-							},
-							title: {
-							display: true,
-							text: title
+							responsive: true,
+							plugins: {
+								zoom: {
+									pan: {
+										enabled: true,
+										mode: 'xy',
+										overScaleMode: 'y'
+									},
+									zoom: {
+										wheel: {
+											enabled: true,
+										},
+										pinch: {
+											enabled: true,
+										},
+										mode: 'xy',
+										overScaleMode: 'y'
+									}
+								},
+								legend: {
+									position: 'top',
+									labels: {
+										color: "#ffffff"
+									}
+								},
+								title: {
+									display: true,
+									text: title,
+									font: {
+										size: 20,
+									},
+									color: '#ffffff'
+								}
 							}
-						}
 						},
 					};
 
@@ -193,16 +332,104 @@
 					const chart = new Chart(ctx, config)
 				}
 
-				setChart(times_co2, co2s, labels[0], titles[0], colors[0], ids[0]);
-				setChart(times_methane, methanes, labels[1], titles[1], colors[1], ids[1]);
-				setChart(times_nitrous, nitrouses, labels[2], titles[2], colors[2], ids[2]);
+				for (let i = 0; i < times.length; i++) {
+					setChart(times[i], datasets[i], labels[i], titles[i], colors[i], ids[i], y_titles[i]);
+				}
+			</script>
 
-				// const ctx_co2 = document.getElementById('co2_chart');
-				// const co2_chart = new Chart(ctx_co2, config)
-				// const ctx_methane = document.getElementById('methane_chart');
-				// const methane_chart = new Chart(ctx_methane, config)
-				// const ctx_nitrous = document.getElementById('nitrous_chart');
-				// const nitrous_chart = new Chart(ctx_nitrous, config)
+			<script type="text/javascript">
+				$('.predict').click(function(){
+					let buttonid = event.target.id;
+					let year = null;
+					let month = null;
+					let day = null;
+					let result = null;
+					let url = null;
+					let params = null;
+					let result_str = null;
+
+					switch(buttonid) {
+						case 'predict_co2':
+							year = parseInt($('#year_co2').val());
+							month = parseInt($('#month_co2').val());
+							day = parseInt($('#day_co2').val());
+							result = $('#result_co2');
+							url = '{{url_for("ml.co2")}}';
+							params = {'year':year, 'month':month, 'day':day};
+							break;
+						case 'predict_methane':
+							year = parseInt($('#year_methane').val());
+							month = parseInt($('#month_methane').val());
+							result = $('#result_methane');
+							url = '{{url_for("ml.methane")}}';
+							params = {'year':year, 'month':month};
+							break;
+						case 'predict_nitrous':
+							year = parseInt($('#year_nitrous').val());
+							month = parseInt($('#month_nitrous').val());
+							result = $('#result_nitrous');
+							url = '{{url_for("ml.nitrous")}}';
+							params = {'year':year, 'month':month};
+							break;
+					};
+
+					const d = new Date();
+					let year_now = d.getFullYear();
+
+					if (!year) {
+						alert('년도를 입력해주세요.');
+						return;
+					} else if(typeof year != 'number') {
+						alert('년도에 숫자를 입력해주세요.');
+						return;
+					} else if (year <= year_now) {
+						alert(year_now+'년 이후 년도를 입력해주세요.');
+						return;
+					} else if (!month) {
+						alert('월을 선택해주세요.');
+						return;
+					}
+
+					var ld = new Date(year, month, 0);
+					var last_day = ld.getDate();
+
+					if (buttonid == 'predict_co2' && !day) {
+						alert('일자를 입력해주세요.');
+						return;
+					} else if (day && typeof day != 'number') {
+						alert('일자에 숫자를 입력해주세요.');
+						return;
+					} else if(day > last_day) {
+						alert(last_day + ' 이하 숫자를 입력해주세요.');
+						return;
+					}
+
+					$.ajax({
+						type: 'GET',
+						url: url,
+						data: params,
+						dataType : 'text',
+						contentType: "application/json",
+						success: function(data){
+							switch(buttonid) {
+								case 'predict_co2':
+									result_str = '%s년 %s월 %s일 대기 중 이산화탄소 예측 결과는 %s ppm 입니다.'.format(year, month, day, data);
+									break;
+								case 'predict_methane':
+									result_str = '%s년 %s월 대기 중 메탄 예측 결과는 %s ppm 입니다.'.format(year, month, data);
+									break;
+								case 'predict_nitrous':
+									result_str = '%s년 %s월 대기 중 아산화질소 예측 결과는 %s ppb 입니다.'.format(year, month, data);
+									break;
+							}
+							alert(result_str);
+							result.text(result_str);
+						},
+						error: function(request, status, error){
+							alert(error);
+						}
+					})
+				})
 			</script>
 		{% endblock %}
 

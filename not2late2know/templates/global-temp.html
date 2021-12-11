@@ -36,26 +36,66 @@
 									<header class="major">
 										<h1>세계 평균 기온의 변화 (Global Temperature)</h1>
 									</header>
-									<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
 									<canvas id="gbtmp_chart"></canvas>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+									<p>지구의 표면은 지속적으로 상당히 따뜻해지고 있으며, 최근의 지구 온도는 지난 2,000년 이래로 가장 뜨겁습니다.</p>
+									<p>현재의 지구 온난화 속도는 자연스럽지 않습니다. 1880년부터 1981년까지는 10년마다 0.07°C씩 상승하였는데, 1981년부터는 0.18°C로 증가하였습니다.</p>
+									<p>산업 혁명 이후 지구 평균 기온 상승은 약 1.0°C 입니다. 지구의 북반구는 더 빨리 따뜻해지고 있습니다. 북극은 2°C에서 4°C 사이로 따뜻해졌습니다.</p>
+									<p>지구의 온도와 대기 중의 이산화탄소, 메탄, 아산화질소와 같은 가스의 비율은 강한 상관 관계가 있습니다.</p>
+									<p class="text-secondary">출처 : <a href="https://climate.nasa.gov/vital-signs/global-temperature/">climate.nasa.gov</a>, <a href="https://global-warming.org/">global-warming.org</a></p>
 								</div>
 							</section>
 
+							{% block predict %}
 							<section id="two">
+								<div class="inner">
+									<h3>기온 변화 예측하기</h2>
+									<form class="row align-items-end">
+										<div class="col">
+											<label for="year">년도</label>
+											<input type="number" id="year" class="form-control" aria-label="년도 입력란">
+										</div>
+										<div class="col">
+											<label for="month">월 선택</label>
+											<select class="form-select" id="month" aria-label="월 선택란">
+												<option selected>월 선택</option>
+												{% for i in range(12) %}
+												<option value={{ i+1 }}>{{ i+1 }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="col-auto">
+											<button id="predict" class="btn btn-outline-secondary" type="button">예측하기</button>
+										</div>
+									</form>
+
+									<div class="row">
+										<div class="col">
+											<h4>예측 결과</h4>
+											<p id="result"></p>
+										</div>
+									</div>
+								</div>
+							</section>
+							{% endblock %}
+							<!--<section id="two">
 								<div class="inner">
 									<h3>현재 위치 : </h2>
 									<h3>현재 기온 : </h3>
 									<h3>10년 전 같은 날의 기온 : </h3>
-									<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
 									<canvas id="seoultmp_chart"></canvas>
 									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
 									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
 								</div>
-							</section>
+							</section>-->
+							<div class="m-3 pb-1">
+								<p class="mb-1 mt-3">[참고 자료]</p>
+								<ul>
+									<li><a href="https://climate.nasa.gov/vital-signs/global-temperature/">NASA - Global Climate Change (Global Temperature)</a></li>
+									<li><a href="https://global-warming.org/">Global Warming live graphs and API</a></li>
+									<li><a href="https://earthobservatory.nasa.gov/global-maps">NASA - earth observatory (Global Maps)</a></li>
+								</ul>
+							</div>
 						{% endblock %}
 					</div>
 
@@ -69,6 +109,7 @@
 		<!-- Scripts -->
 		{% block scripts %}
 			{{ super() }}
+			<!-- 차트 기능을 위한 스크립트 -->
 			<script type="text/javascript">
 				var gbtemp = JSON.parse({{ gbtemp|tojson }});
 
@@ -79,7 +120,7 @@
 					labels: times,
 					datasets: [
 						{
-							label: 'Global Temperature',
+							label: '세계 평균 온도',
 							data: temps,
 							borderColor: '#FF6384',
 							borderWidth: 1,
@@ -94,38 +135,108 @@
 					type: 'line',
 					data: data,
 					options: {
-					  responsive: true,
-					  plugins: {
-						zoom: {
-							pan: {
-								enabled: true,
-								mode: 'xy',
-								overScaleMode: 'y'
+						scales: {
+							yAxes: {
+								title: {
+									display: true,
+									text: "온도 (°C)",
+									font: {
+										size: 15
+									},
+									color: '#ffffff'
+								},
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
 							},
-							zoom: {
-								wheel: {
-									enabled: true,
-								},
-								pinch: {
-									enabled: true,
-								},
-								mode: 'xy',
-								overScaleMode: 'y'
+							xAxes: {
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
 							}
 						},
-						legend: {
-						  position: 'top',
-						},
-						title: {
-						  display: true,
-						  text: 'The Trend of Global Temperature'
+						responsive: true,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: "#ffffff"
+								}
+							},
+							title: {
+								display: true,
+								text: '세계 온도 기록의 변화',
+								font: {
+									size: 20,
+								},
+								color: '#ffffff'
+							}
 						}
-					  }
-					},
-				  };
+					}
+				};
 
 				const ctx = document.getElementById('gbtmp_chart');
 				const gbtmp_chart = new Chart(ctx, config)
+			</script>
+
+			<!-- 세계 평균 기온 예측 모델을 위한 스크립트 -->
+			<script type="text/javascript">
+				$('#predict').click(function(){
+					const d = new Date();
+					let year_now = d.getFullYear();
+
+					var year = $('#year').val();
+					var month = $('#month').val();
+
+					if (year <= year_now) {
+						alert(year_now+'년 이후 년도를 입력해주세요.');
+						return;
+					}
+
+					var params = {
+						'year':year, 'month':month
+					}
+					$.ajax({
+						type: 'GET',
+						url: '{{url_for("ml.global_temp")}}',
+						data: params,
+						dataType : 'text',
+						contentType: "application/json",
+						success: function(data){
+							result = '%s년 %s월 세계 평균 기온 예측 결과는 %s°C 입니다.'.format(year, month, data);
+							alert(result);
+							$('#result').text(result);
+						},
+						error: function(request, status, error){
+							alert(error);
+						}
+					})
+				})
 			</script>
 		{% endblock %}
 

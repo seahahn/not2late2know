@@ -51,22 +51,29 @@
 					<div id="main" class="alt">
 						{% block main %}
 						<!-- One -->
-							<section id="one">
-								<div class="inner">
-									<header class="major">
-										<h1>해수면 높이 (Sea Level)</h1>
-									</header>
-									<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
-									<canvas id="sea_level_chart"></canvas>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
-								</div>
-							</section>
-							<!--<iframe width="100%" style="display:block; height: 100vh" src="https://livingatlas.arcgis.com/sea-ice/">
-							</iframe>
-							<span class="text-secondary">Source from : <a href="https://livingatlas.arcgis.com/sea-ice/">https://livingatlas.arcgis.com/sea-ice/</a></span>-->
-							{% endblock %}
+						<section id="one">
+							<div class="inner">
+								<header class="major">
+									<h1>해수면 높이 (Sea Level)</h1>
+								</header>
+								<!-- <span class="image main"><img src="static/images/pic11.jpg" alt="" /></span> -->
+								<canvas id="sea_level_chart"></canvas>
+								<p>위 그래프는 1880년도 해수면을 기준으로 현재까지의 해수면 높이 변화를 나타낸 것입니다.</p>
+								<p>지구 해수면은 인간이 초래한 지구 온난화의 결과로 상승하고 있으며, 최근 이 비율은 지난 2,000년 동안 전례가 없었습니다.</p>
+								<p>해수면 상승은 주로 지구 온난화와 관련된 두 가지 요인, 빙하와 영구 동토층이 녹아내린 물이 바다로 흘러들어가는 것과 해수 온도가 따뜻해짐에 따라 바닷물이 팽창하는 것에 의해 발생합니다.</p>
+								<p>하단의 애플리케이션을 통해 해수면 상승이 가져오는 결과를 짐작해볼 수 있습니다.</p>
+							</div>
+						</section>
+						<iframe width="100%" style="display:block; min-height: 90vh" src="https://csb-6kq9k.netlify.app/">
+						</iframe>
+						<span class="text-secondary">Source from : <a href="https://openlayers.org/en/latest/examples/webgl-sea-level.html">https://openlayers.org/en/latest/examples/webgl-sea-level.html</a></span>
+						<div class="m-3 pb-1">
+							<p class="mb-1 mt-3">[참고 자료]</p>
+							<ul>
+								<li><a href="https://climate.nasa.gov/vital-signs/sea-level/">NASA - Global Climate Change (Sea Level)</a></li>
+							</ul>
+						</div>
+						{% endblock %}
 					</div>
 
 				<!-- Contact -->
@@ -89,7 +96,7 @@
 					labels: year,
 					datasets: [
 						{
-							label: 'Sea Level',
+							label: '해수면 높이',
 							data: level,
 							borderColor: '#76A9B9',
 							borderWidth: 1,
@@ -104,35 +111,70 @@
 					type: 'line',
 					data: data,
 					options: {
-					  responsive: true,
-					  plugins: {
-						zoom: {
-							pan: {
-								enabled: true,
-								mode: 'xy',
-								overScaleMode: 'y'
+						scales: {
+							yAxes: {
+								title: {
+									display: true,
+									text: "해수면 높이 변화 (mm)",
+									font: {
+										size: 15
+									},
+									color: '#ffffff'
+								},
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
 							},
-							zoom: {
-								wheel: {
-									enabled: true,
-								},
-								pinch: {
-									enabled: true,
-								},
-								mode: 'xy',
-								overScaleMode: 'y'
+							xAxes: {
+								ticks: {
+									display: true,
+									font: {
+										size: 11,
+									},
+									color: '#ffffff'
+								}
 							}
 						},
-						legend: {
-						  position: 'top',
-						},
-						title: {
-						  display: true,
-						  text: 'The Trend of Sea Level'
+						responsive: true,
+						plugins: {
+							zoom: {
+								pan: {
+									enabled: true,
+									mode: 'xy',
+									overScaleMode: 'y'
+								},
+								zoom: {
+									wheel: {
+										enabled: true,
+									},
+									pinch: {
+										enabled: true,
+									},
+									mode: 'xy',
+									overScaleMode: 'y'
+								}
+							},
+							legend: {
+								position: 'top',
+								labels: {
+									color: "#ffffff"
+								}
+							},
+							title: {
+								display: true,
+								text: '해수면 높이의 변화(1880년도 기준)',
+								font: {
+									size: 20,
+								},
+								color: '#ffffff'
+							}
 						}
-					  }
 					},
-				  };
+				};
 
 				const ctx = document.getElementById('sea_level_chart');
 				const sea_level_chart = new Chart(ctx, config)

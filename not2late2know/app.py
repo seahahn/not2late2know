@@ -5,6 +5,10 @@ def create_app():
 
     from routes import main_routes
     app.register_blueprint(main_routes.bp)
+    from routes import api_routes
+    app.register_blueprint(api_routes.bp)
+    from routes import ml_routes
+    app.register_blueprint(ml_routes.bp)
 
     return app
 
