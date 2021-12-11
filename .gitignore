@@ -4,6 +4,5 @@
 csv_save.py
 apidata_save.py
 test.py
-db_conn.py
 __pycache__
 *.sql
