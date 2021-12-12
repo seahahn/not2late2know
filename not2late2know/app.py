@@ -32,7 +32,7 @@ def create_app():
 
     return app
 
-def logging_setting():
+def logging_setting(app):
     import logging
     from logging.handlers import RotatingFileHandler
     from logging import Formatter
