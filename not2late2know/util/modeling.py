@@ -1,4 +1,4 @@
-import warnings, logging
+import warnings, logging, os
 from joblib import dump, load
 from .db_conn import exec_select
 import pandas as pd
@@ -11,6 +11,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from pytz import utc
 
 warnings.filterwarnings(action='ignore')
+
+BASE_DIR = os.path.dirname(__file__)
 
 gbtemp_query = "SELECT * FROM global_temp"
 gbtemp_columns = ['year', 'month', 'tmp']
@@ -60,7 +62,8 @@ scheduler = BackgroundScheduler(timezone=utc)
 def model_fit():
     for q, col, target, model_name in zip(querys, column_sets, targets, model_save_names):
         model = processing(query(q, col), target)
-        path = F"not2late2know/util/ml_models/{model_name}.joblib"
+        # path = F"{BASE_DIR}/ml_models/{model_name}.joblib"
+        path = os.path.join(BASE_DIR, f"ml_models/{model_name}.joblib")
         dump(model, path)
         print("modeling executed")
         log_message = "modeling executed:{}".format(datetime.now())
