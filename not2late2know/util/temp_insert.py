@@ -2,10 +2,10 @@
 1954년부터 현재까지의 서울 기온 데이터와
 세계 평균 기온 데이터 저장하는 스케줄러 함수 구현
 
-서울 기온 데이터는 매일 오전 11시 30분에 전일 기온 데이터를 받아온 후 DB에 저장.
+서울 기온 데이터는 매일 오전 12시에 전일 기온 데이터를 받아온 후 DB에 저장.
 세계 평균 기온 데이터는 매일 0시에 전월 데이터 존재 여부 확인 후 있으면 저장.
 '''
-from db_conn import db_conn, exec_insert, exec_select
+from .db_conn import db_conn, exec_insert, exec_select
 import time
 from datetime import date, timedelta
 from pytz import utc
@@ -26,9 +26,9 @@ def get_request_query(url, operation, params, serviceKey):
 scheduler = BackgroundScheduler(timezone=utc)
 
 # 서울 기온 데이터 스케줄러 함수
-# 매일 오전 11시 30분에 실행
+# 매일 오전 12시에 실행
 @scheduler.scheduled_job('interval', seconds=5)
-# @scheduler.scheduled_job('cron', hour='11', minute='10')
+# @scheduler.scheduled_job('cron', hour='12')
 def temp_insert():
     # 요청 URL과 오퍼레이션
     URL = 'http://apis.data.go.kr/1360000/AsosDalyInfoService'
@@ -68,7 +68,7 @@ def temp_insert():
 
 # 세계 평균 기온 데이터 스케줄러 함수
 # 매일 0시에 실행
-@scheduler.scheduled_job('interval', seconds=5)
+@scheduler.scheduled_job('interval', seconds=7)
 # @scheduler.scheduled_job('cron', hour='0')
 def global_temp_insert():
     # 요청 URL 전송 및 데이터 불러오기
@@ -92,10 +92,14 @@ def global_temp_insert():
         print("inserting executed global_temp_insert")
 
     print("executed global_temp_insert")
+    
+# @scheduler.scheduled_job('interval', seconds=5)
+# def scheduler_test():
+#     print("it's running")
 
 # 스케줄러 수행 시작
-scheduler.start()
+# scheduler.start()
 
 # 스케줄러 지속 실행을 위한 반복문 수행
-while True:
-    time.sleep(5)
+# while True:
+#     time.sleep(5)
