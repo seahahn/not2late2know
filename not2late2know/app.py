@@ -1,6 +1,5 @@
 from flask import Flask
-import sys, os, logging
-
+import os
 def create_app():
     app = Flask(__name__)
     logging_setting(app) # 로그 기록 남기기 세팅
@@ -44,15 +43,17 @@ def logging_setting(app):
     app.config['LOGGING_FILENAME'] = 'log_record.log'
     app.config['LOGGING_MAX_BYTES'] = 100000
     app.config['LOGGING_BACKUP_COUNT'] = 1000
+    
 
     # logging
     if not app.debug:
         log_dir = os.path.join(app.config['HOME_DIR'], app.config['LOGGING_LOCATION'])
-        file_handler = RotatingFileHandler(log_dir + app.config['LOGGING_FILENAME'], maxBytes=app.config['LOGGING_MAX_BYTES'], backupCount=app.config['LOGGING_BACKUP_COUNT'])
-        file_handler.setFormatter(Formatter(app.config['LOGGING_FORMAT']))
-        file_handler.setLevel(app.config['LOGGING_LEVEL'])
-        app.logger.addHandler(file_handler)
-        app.logger.info("logging start")
+        # file_handler = RotatingFileHandler(log_dir + app.config['LOGGING_FILENAME'], maxBytes=app.config['LOGGING_MAX_BYTES'], backupCount=app.config['LOGGING_BACKUP_COUNT'])
+        # file_handler.setFormatter(Formatter(app.config['LOGGING_FORMAT']))
+        # file_handler.setLevel(app.config['LOGGING_LEVEL'])
+        # app.logger.addHandler(file_handler)
+        logging.basicConfig(filename = log_dir + app.config['LOGGING_FILENAME'], level = logging.DEBUG)
+        logging.info("logging start")
 
 
 if __name__ == '__main__':
