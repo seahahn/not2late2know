@@ -11,6 +11,28 @@
 		{% block head %}
 			{{ super() }}
 		{% endblock %}
+		{% block sec_two_css %}
+		<style>
+			#two {
+				position: relative;
+				z-index: 1;
+			}
+
+			#two:after {
+				content: '';
+				width: 100%;
+    			height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0.5;
+				background: url('static/images/act_now.jpg');
+				background-size: cover;
+    			background-position: center;
+				z-index: -1;
+			}
+		</style>
+		{% endblock %}
 	</head>
 	<body class="is-preload">
 

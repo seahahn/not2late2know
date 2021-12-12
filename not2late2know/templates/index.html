@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
 		{% endblock %}
+		{% block sec_two_css %}
 		<style>
 			#two {
 				position: relative;
@@ -34,6 +35,7 @@
 				z-index: -1;
 			}
 		</style>
+		{% endblock %}
 	</head>
 	<body class="is-preload">
 
