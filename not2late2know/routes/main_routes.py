@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 import pandas as pd
 from util.db_conn import db_conn, exec_insert, exec_select
-from util.model_load import gbtemp_query, gbtemp_columns, co2_query, co2_columns, methane_query, methane_columns, nitrous_query, nitrous_columns
+from util.modeling import gbtemp_query, gbtemp_columns, co2_query, co2_columns, methane_query, methane_columns, nitrous_query, nitrous_columns
 
 bp = Blueprint('main', __name__, template_folder='templates')
 

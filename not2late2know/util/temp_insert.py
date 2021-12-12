@@ -2,18 +2,17 @@
 1954년부터 현재까지의 서울 기온 데이터와
 세계 평균 기온 데이터 저장하는 스케줄러 함수 구현
 
-서울 기온 데이터는 매일 오전 12시에 전일 기온 데이터를 받아온 후 DB에 저장.
+서울 기온 데이터는 매일 12시에 전일 기온 데이터를 받아온 후 DB에 저장.
 세계 평균 기온 데이터는 매일 0시에 전월 데이터 존재 여부 확인 후 있으면 저장.
 '''
 from .db_conn import db_conn, exec_insert, exec_select
-import time
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler
-import requests
-import os
+import requests, os, logging
 from dotenv import load_dotenv
 load_dotenv()
+
 
 # 공공데이터포털 get 요청 URL을 문자열로 변환. 안 하면 특수문자 유니코드로 인식해서 API 키 안 먹힘.
 def get_request_query(url, operation, params, serviceKey):
@@ -26,7 +25,7 @@ def get_request_query(url, operation, params, serviceKey):
 scheduler = BackgroundScheduler(timezone=utc)
 
 # 서울 기온 데이터 스케줄러 함수
-# 매일 오전 12시에 실행
+# 매일 12시에 실행
 @scheduler.scheduled_job('interval', seconds=5)
 # @scheduler.scheduled_job('cron', hour='12')
 def temp_insert():
@@ -60,9 +59,11 @@ def temp_insert():
 
             if len(result) == 0:
                 exec_insert(insert_query)
-                print("inserting executed global_temp_insert")
+                log_message = "inserting executed global_temp_insert:{}".format(datetime.now())
+                logging.debug(log_message)
 
-        print("executed temp_insert")
+        log_message = "executed temp_insert:{}".format(datetime.now())
+        logging.debug(log_message)
     except Exception as e:
         print(e)
 
@@ -89,9 +90,11 @@ def global_temp_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
-        print("inserting executed global_temp_insert")
+        log_message = "inserting executed global_temp_insert:{}".format(datetime.now())
+        logging.debug(log_message)
 
-    print("executed global_temp_insert")
+    log_message = "executed global_temp_insert:{}".format(datetime.now())
+    logging.debug(log_message)
     
 # @scheduler.scheduled_job('interval', seconds=5)
 # def scheduler_test():

@@ -3,12 +3,12 @@
 
 북극 해빙 면적(년 단위) : 매일 1시에 전년 데이터 존재 여부 확인 후 있으면 저장
 '''
-from db_conn import db_conn, exec_insert, exec_select
+from .db_conn import db_conn, exec_insert, exec_select
 import time
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler
-import requests
+import requests, logging
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -37,13 +37,15 @@ def sea_ice_insert():
     # 데이터 없으면 삽입문 전송
     if len(result) == 0:
         exec_insert(insert_query)
-        print("inserting executed sea_ice_insert")
+        log_message = "inserting executed sea_ice_insert".format(datetime.now())
+        logging.debug(log_message)
         
-    print("executed sea_ice_insert")
+    log_message = "executed sea_ice_insert:{}".format(datetime.now())
+    logging.debug(log_message)
 
 # 스케줄러 수행 시작
-scheduler.start()
+# scheduler.start()
 
 # 스케줄러 지속 실행을 위한 반복문 수행
-while True:
-    time.sleep(5)
+# while True:
+    # time.sleep(5)
