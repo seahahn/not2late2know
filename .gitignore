@@ -6,3 +6,4 @@ apidata_save.py
 test.py
 __pycache__
 *.sql
+.logs

@@ -26,8 +26,8 @@ scheduler = BackgroundScheduler(timezone=utc)
 
 # 서울 기온 데이터 스케줄러 함수
 # 매일 12시에 실행
-@scheduler.scheduled_job('interval', seconds=5)
-# @scheduler.scheduled_job('cron', hour='12')
+# @scheduler.scheduled_job('interval', seconds=5)
+@scheduler.scheduled_job('cron', hour='12')
 def temp_insert():
     # 요청 URL과 오퍼레이션
     URL = 'http://apis.data.go.kr/1360000/AsosDalyInfoService'

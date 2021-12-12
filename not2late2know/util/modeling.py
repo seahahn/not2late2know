@@ -1,7 +1,8 @@
-import warnings
+import warnings, logging
 from joblib import dump, load
 from .db_conn import exec_select
 import pandas as pd
+from datetime import datetime
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -62,6 +63,8 @@ def model_fit():
         path = F"not2late2know/util/ml_models/{model_name}.joblib"
         dump(model, path)
         print("modeling executed")
+        log_message = "modeling executed:{}".format(datetime.now())
+        logging.debug(log_message)
 
 # model_gbtemp = processing(query(gbtemp_query, gbtemp_columns), gbtemp_columns[-1])
 # model_co2 = processing(query(co2_query, co2_columns), co2_columns[-1])
