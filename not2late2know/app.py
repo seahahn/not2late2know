@@ -52,7 +52,8 @@ def logging_setting(app):
         # file_handler.setFormatter(Formatter(app.config['LOGGING_FORMAT']))
         # file_handler.setLevel(app.config['LOGGING_LEVEL'])
         # app.logger.addHandler(file_handler)
-        logging.basicConfig(filename = log_dir + app.config['LOGGING_FILENAME'], level = logging.DEBUG)
+        logging.basicConfig(filename = log_dir + app.config['LOGGING_FILENAME'])
+        logging.getLogger('apscheduler').setLevel(logging.DEBUG)
         logging.info("logging start")
 
 
