@@ -3,7 +3,7 @@ import sys, os, logging
 
 def create_app():
     app = Flask(__name__)
-    logging_setting() # 로그 기록 남기기 세팅
+    logging_setting(app) # 로그 기록 남기기 세팅
 
     # 웹페이지 라우트 설정
     from routes import main_routes
