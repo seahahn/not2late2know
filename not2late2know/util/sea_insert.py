@@ -39,9 +39,11 @@ def sea_ice_insert():
         exec_insert(insert_query)
         log_message = "inserting executed sea_ice_insert".format(datetime.now())
         logging.debug(log_message)
+        print(log_message)
         
     log_message = "executed sea_ice_insert:{}".format(datetime.now())
     logging.debug(log_message)
+    print(log_message)
 
 # 스케줄러 수행 시작
 # scheduler.start()

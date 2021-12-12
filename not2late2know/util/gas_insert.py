@@ -43,9 +43,11 @@ def co2_insert():
         exec_insert(insert_query)
         log_message = "inserting executed co2_insert:{}".format(datetime.now())
         logging.debug(log_message)
+        print(log_message)
         
     log_message = "executed co2_insert:{}".format(datetime.now())
     logging.debug(log_message)
+    print(log_message)
 
 # 메탄 데이터 저장 스케줄러 함수
 # 매일 0시 5분에 실행
@@ -72,9 +74,11 @@ def methane_insert():
         exec_insert(insert_query)
         log_message = "inserting executed methane_insert:{}".format(datetime.now())
         logging.debug(log_message)
+        print(log_message)
 
     log_message = "executed methane_insert:{}".format(datetime.now())
     logging.debug(log_message)
+    print(log_message)
 
 # 아산화질소 데이터 저장 스케줄러 함수
 # 매일 0시 10분에 실행
@@ -101,9 +105,11 @@ def nitrous_insert():
         exec_insert(insert_query)
         log_message = "inserting executed nitrous_insert:{}".format(datetime.now())
         logging.debug(log_message)
+        print(log_message)
 
     log_message = "executed nitrous_insert:{}".format(datetime.now())
     logging.debug(log_message)
+    print(log_message)
 
 # 스케줄러 수행 시작
 # scheduler.start()

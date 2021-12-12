@@ -65,8 +65,8 @@ def model_fit():
         # path = F"{BASE_DIR}/ml_models/{model_name}.joblib"
         path = os.path.join(BASE_DIR, f"ml_models/{model_name}.joblib")
         dump(model, path)
-        print("modeling executed")
         log_message = "modeling executed:{}".format(datetime.now())
+        print(log_message)
         logging.debug(log_message)
 
 # model_gbtemp = processing(query(gbtemp_query, gbtemp_columns), gbtemp_columns[-1])

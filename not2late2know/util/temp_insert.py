@@ -61,9 +61,11 @@ def temp_insert():
                 exec_insert(insert_query)
                 log_message = "inserting executed global_temp_insert:{}".format(datetime.now())
                 logging.debug(log_message)
+                print(log_message)
 
         log_message = "executed temp_insert:{}".format(datetime.now())
         logging.debug(log_message)
+        print(log_message)
     except Exception as e:
         print(e)
 
@@ -92,9 +94,11 @@ def global_temp_insert():
         exec_insert(insert_query)
         log_message = "inserting executed global_temp_insert:{}".format(datetime.now())
         logging.debug(log_message)
+        print(log_message)
 
     log_message = "executed global_temp_insert:{}".format(datetime.now())
     logging.debug(log_message)
+    print(log_message)
     
 # @scheduler.scheduled_job('interval', seconds=5)
 # def scheduler_test():
