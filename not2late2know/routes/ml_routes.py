@@ -1,14 +1,18 @@
 from flask import Blueprint, request
 from joblib import dump, load
+import os
 
 bp = Blueprint('ml', __name__, template_folder='templates')
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 @bp.route('/ml/global-temp/', methods=['GET'])
 def global_temp():
     year = request.args.get('year')
     month = request.args.get('month')
 
-    load_path = F"not2late2know/util/ml_models/model_gbtemp.joblib"
+    # load_path = F"not2late2know/util/ml_models/model_gbtemp.joblib"
+    load_path = os.path.join(BASE_DIR, f"util/ml_models/model_gbtemp.joblib")
     model = load(load_path)
     result = round(model.predict([[year, month]])[0], 2)
 
@@ -20,7 +24,8 @@ def co2():
     month = request.args.get('month')
     day = request.args.get('day')
 
-    load_path = F"not2late2know/util/ml_models/model_co2.joblib"
+    # load_path = F"not2late2know/util/ml_models/model_co2.joblib"
+    load_path = os.path.join(BASE_DIR, f"util/ml_models/model_co2.joblib")
     model = load(load_path)
     result = round(model.predict([[year, month, day]])[0], 2)
 
@@ -31,7 +36,8 @@ def methane():
     year = request.args.get('year')
     month = request.args.get('month')
 
-    load_path = F"not2late2know/util/ml_models/model_methane.joblib"
+    # load_path = F"not2late2know/util/ml_models/model_methane.joblib"
+    load_path = os.path.join(BASE_DIR, f"util/ml_models/model_methane.joblib")
     model = load(load_path)
     result = round(model.predict([[year, month]])[0], 2)
 
@@ -42,7 +48,8 @@ def nitrous():
     year = request.args.get('year')
     month = request.args.get('month')
 
-    load_path = F"not2late2know/util/ml_models/model_nitrous.joblib"
+    # load_path = F"not2late2know/util/ml_models/model_nitrous.joblib"
+    load_path = os.path.join(BASE_DIR, f"util/ml_models/model_nitrous.joblib")
     model = load(load_path)
     result = round(model.predict([[year, month]])[0], 2)
 
