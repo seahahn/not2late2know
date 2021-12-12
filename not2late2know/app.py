@@ -18,19 +18,19 @@ def create_app():
     # DB에 데이터 저장 수행하는 스케줄러 설정
     from util import temp_insert
     temp_scheduler = temp_insert.scheduler
-    # from util import gas_insert
-    # gas_scheduler = gas_insert.scheduler
-    # from util import sea_insert
-    # sea_scheduler = sea_insert.scheduler
+    from util import gas_insert
+    gas_scheduler = gas_insert.scheduler
+    from util import sea_insert
+    sea_scheduler = sea_insert.scheduler
     # 모델 학습 및 모델 객체 저장하는 스케줄러 설정
-    # from util import modeling
-    # model_scheduler = modeling.scheduler
+    from util import modeling
+    model_scheduler = modeling.scheduler
 
     # 스케줄러 시작
-    # temp_scheduler.start()
-    # gas_scheduler.start()
-    # sea_scheduler.start()
-    # model_scheduler.start()
+    temp_scheduler.start()
+    gas_scheduler.start()
+    sea_scheduler.start()
+    model_scheduler.start()
 
     return app
 

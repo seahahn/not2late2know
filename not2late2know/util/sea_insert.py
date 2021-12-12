@@ -17,7 +17,7 @@ scheduler = BackgroundScheduler(timezone=utc)
 
 # 북극 해빙 면적 데이터 스케줄러 함수
 # 매일 1시에 실행
-@scheduler.scheduled_job('interval', seconds=5)
+@scheduler.scheduled_job('interval', seconds=8)
 # @scheduler.scheduled_job('cron', hour='1')
 def sea_ice_insert():
     # 요청 URL 전송 및 데이터 불러오기
