@@ -3380,7 +3380,8 @@ input, select, textarea {
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
-		background-image: url("../../images/banner.jpg");
+		background-image: url("../../images/act_now.jpg");
+		/* background-image: url("../../images/banner.jpg"); */
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -3481,9 +3482,9 @@ input, select, textarea {
 				}
 
 		#banner.major {
-			height: 75vh;
+			height: 100vh;
 			min-height: 30em;
-			max-height: 50em;
+			max-height: 60em;
 		}
 
 			#banner.major.alt {

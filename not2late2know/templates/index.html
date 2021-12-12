@@ -14,6 +14,26 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
 		{% endblock %}
+		<style>
+			#two {
+				position: relative;
+				z-index: 1;
+			}
+
+			#two:after {
+				content: '';
+				width: 100%;
+    			height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0.5;
+				background: url('static/images/one_world.jpg');
+				background-size: cover;
+    			background-position: center;
+				z-index: -1;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -35,9 +55,6 @@
 					<nav id="menu">
 						<ul class="links">
 							<li><a href="main">Home</a></li>
-							<!--<li><a href="landing">Landing</a></li>
-							<li><a href="generic">Generic</a></li>
-							<li><a href="elements">Elements</a></li>-->
 							<li><a href="global-temp">Global Temperature</a></li>
 							<li><a href="greenhouse-gas">Greenhouse Gas</a></li>
 							<li><a href="sea-ice">Sea Ice</a></li>
@@ -45,7 +62,6 @@
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="summary" class="button primary fit">Summary Dashboard</a></li>
-							<!--<li><a href="#" class="button fit">Log In</a></li>-->
 						</ul>
 					</nav>
 				{% endblock %}
@@ -60,7 +76,7 @@
 							<div class="content">
 								<p>기후 변화, 얼마나 알고 계신가요?<br>
 								어쩌면 이미 너무 늦어버린 것은 아닐까요?<br>
-								아니면 지금부터라도 알고 움직이면 되지 않을까요?
+								아니면 지금부터 알아보고 행동하면 되지 않을까요?
 								</p>
 								<ul class="actions">
 									<li><a href="#one" class="button next scrolly">더 알아보기</a></li>
@@ -77,7 +93,7 @@
 							<section id="one" class="tiles">
 								<article>
 									<span class="image">
-										<img src="static/images/pic01.jpg" alt="" />
+										<img src="static/images/g_tmp.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="global-temp" class="link">세계 평균 기온의 상승<br>Global Temperature</a></h3>
@@ -86,7 +102,7 @@
 								</article>
 								<article>
 									<span class="image">
-										<img src="static/images/pic02.jpg" alt="" />
+										<img src="static/images/g_gas.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="greenhouse-gas" class="link">온실 가스의 증가<br>Greenhouse Gas</a></h3>
@@ -95,7 +111,7 @@
 								</article>
 								<article>
 									<span class="image">
-										<img src="static/images/pic03.jpg" alt="" />
+										<img src="static/images/sea_ice.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="sea-ice" class="link">해빙 면적의 감소<br>Sea Ice</a></h3>
@@ -104,31 +120,13 @@
 								</article>
 								<article>
 									<span class="image">
-										<img src="static/images/pic04.jpg" alt="" />
+										<img src="static/images/sea_level.jpg" alt="" />
 									</span>
 									<header class="major">
 										<h3><a href="sea-level" class="link">해수면 높이의 상승<br>Sea Level</a></h3>
 										<p>해수면은 인간이 초래한 지구 온난화의 결과로 상승하고 있고, 최근 이 비율은 지난 2,000년 동안 전례가 없었습니다.<br>해수면 상승은 주로 지구 온난화와 관련된 요인에 의해 발생합니다.</p>
 									</header>
 								</article>
-								<!--<article>
-									<span class="image">
-										<img src="static/images/pic05.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="landing.html" class="link">Consequat</a></h3>
-										<p>Ipsum dolor sit amet</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="static/images/pic06.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="landing.html" class="link">Etiam</a></h3>
-										<p>Feugiat amet tempus</p>
-									</header>
-								</article>-->
 							</section>
 
 						<!-- Two -->
