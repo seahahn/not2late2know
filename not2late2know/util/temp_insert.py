@@ -67,12 +67,13 @@ def temp_insert():
         logging.debug(log_message)
         print(log_message)
     except Exception as e:
+        logging.debug(e)
         print(e)
 
 # 세계 평균 기온 데이터 스케줄러 함수
 # 매일 0시에 실행
-@scheduler.scheduled_job('interval', seconds=7)
-# @scheduler.scheduled_job('cron', hour='0')
+# @scheduler.scheduled_job('interval', seconds=7)
+@scheduler.scheduled_job('cron', hour='0')
 def global_temp_insert():
     # 요청 URL 전송 및 데이터 불러오기
     response = requests.get(url='https://global-warming.org/api/temperature-api').json()['result'][-1]

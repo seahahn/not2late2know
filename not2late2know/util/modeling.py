@@ -57,8 +57,8 @@ def processing(df, target):
 # 모델 학습 후 모델 객체 저장하는 스케줄링 함수
 # 매일 2시에 진행(머신 러닝 모델 학습 대상 데이터 중 북극 해빙 데이터 수집이 1시에 진행됨)
 scheduler = BackgroundScheduler(timezone=utc)
-@scheduler.scheduled_job('interval', seconds=30)
-# @scheduler.scheduled_job('cron', hour='2')
+# @scheduler.scheduled_job('interval', seconds=30)
+@scheduler.scheduled_job('cron', hour='2')
 def model_fit():
     for q, col, target, model_name in zip(querys, column_sets, targets, model_save_names):
         model = processing(query(q, col), target)
@@ -66,8 +66,8 @@ def model_fit():
         path = os.path.join(BASE_DIR, f"ml_models/{model_name}.joblib")
         dump(model, path)
         log_message = "modeling executed:{}".format(datetime.now())
-        print(log_message)
         logging.debug(log_message)
+        print(log_message)
 
 # model_gbtemp = processing(query(gbtemp_query, gbtemp_columns), gbtemp_columns[-1])
 # model_co2 = processing(query(co2_query, co2_columns), co2_columns[-1])

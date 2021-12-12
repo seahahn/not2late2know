@@ -2,7 +2,6 @@ from flask import Flask
 import os
 def create_app():
     app = Flask(__name__)
-    logging_setting(app) # 로그 기록 남기기 세팅
 
     # 웹페이지 라우트 설정
     from routes import main_routes
@@ -30,32 +29,6 @@ def create_app():
     model_scheduler.start()
 
     return app
-
-def logging_setting(app):
-    import logging
-    from logging.handlers import RotatingFileHandler
-    from logging import Formatter
-
-    app.config['HOME_DIR'] = os.path.expanduser('~')
-    app.config['LOGGING_LEVEL'] = logging.INFO
-    app.config['LOGGING_FORMAT'] = '%(asctime)s %(levelname)s: %(message)s in %(filename)s:%(lineno)d]'
-    app.config['LOGGING_LOCATION'] = 'not2late2know/logs/'
-    app.config['LOGGING_FILENAME'] = 'log_record.log'
-    app.config['LOGGING_MAX_BYTES'] = 100000
-    app.config['LOGGING_BACKUP_COUNT'] = 1000
-    
-
-    # logging
-    if not app.debug:
-        log_dir = os.path.join(app.config['HOME_DIR'], app.config['LOGGING_LOCATION'])
-        # file_handler = RotatingFileHandler(log_dir + app.config['LOGGING_FILENAME'], maxBytes=app.config['LOGGING_MAX_BYTES'], backupCount=app.config['LOGGING_BACKUP_COUNT'])
-        # file_handler.setFormatter(Formatter(app.config['LOGGING_FORMAT']))
-        # file_handler.setLevel(app.config['LOGGING_LEVEL'])
-        # app.logger.addHandler(file_handler)
-        logging.basicConfig(filename = log_dir + app.config['LOGGING_FILENAME'])
-        logging.getLogger('apscheduler').setLevel(logging.DEBUG)
-        logging.info("logging start")
-
 
 if __name__ == '__main__':
     app = create_app()
