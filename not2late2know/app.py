@@ -37,6 +37,7 @@ def logging_setting(app):
     from logging.handlers import RotatingFileHandler
     from logging import Formatter
 
+    app.config['HOME_DIR'] = os.path.expanduser('~')
     app.config['LOGGING_LEVEL'] = logging.INFO
     app.config['LOGGING_FORMAT'] = '%(asctime)s %(levelname)s: %(message)s in %(filename)s:%(lineno)d]'
     app.config['LOGGING_LOCATION'] = 'not2late2know/logs/'
