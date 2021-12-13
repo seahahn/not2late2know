@@ -251,7 +251,6 @@
 						contentType: "application/json",
 						success: function(data){
 							result = '%s년 %s월 세계 평균 기온 예측 결과는 %s°C 입니다.'.format(year, month, data);
-							alert(result);
 							$('#result').text(result);
 						},
 						error: function(request, status, error){
