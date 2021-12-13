@@ -8,7 +8,7 @@ Not 2 Late 2 know 는 갈수록 심해지는 기후 변화에 대하여 보다 �
 
 ## Service Structure
 
-![not2late2know_service_structure](https://drive.google.com/uc?export=view&id=132GopVa4aAyTdxz0--oVQceI9eDhODUD)
+![not2late2know_service_structure](https://user-images.githubusercontent.com/73585246/145774815-c99ba9d5-182c-4ec7-a127-9d297e8859fc.png)
 
 1. global-warming.org에서 제공하는 API 및 미국 환경 보호국(EPA)에서 다운로드 받은 기후 변화 관련 요소 데이터를 클라우드 데이터베이스(ElephantSQL-PostgreSQL 기반)에 저장
    - 해수면 높이를 제외한 나머지 데이터는 APScheduler(Advanced Python Scheduler)를 통해 주기적으로 자동 갱신
