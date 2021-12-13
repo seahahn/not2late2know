@@ -3,13 +3,11 @@
 
 북극 해빙 면적(년 단위) : 매일 1시에 전년 데이터 존재 여부 확인 후 있으면 저장
 '''
-from .db_conn import db_conn, exec_insert, exec_select
-import time
-from datetime import date, datetime, timedelta
+from .db_conn import exec_insert, exec_select
+from datetime import datetime
 from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests, logging
-import os
 from dotenv import load_dotenv
 load_dotenv()
 

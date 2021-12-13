@@ -126,7 +126,7 @@ def methane(year, month):
 @bp.route('/api/nitrous/<int:year>', defaults={'month':None}, methods=['GET'])
 @bp.route('/api/nitrous/<int:year>/<int:month>', methods=['GET'])
 def nitrous(year, month):
-    result = exec_select(methane_query)
+    result = exec_select(nitrous_query)
     df = pd.DataFrame(result, columns=nitrous_columns)
 
     years = df.year.to_list()

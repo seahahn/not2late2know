@@ -5,13 +5,11 @@
 메탄(월 단위) : 매일 0시 5분에 전월 데이터 존재 여부 확인 후 있으면 저장 (데이터베이스 연결 중첩 방지)
 아산화질소(월 단위) : 매일 0시 10분에 전월 데이터 존재 여부 확인 후 있으면 저장 (데이터베이스 연결 중첩 방지)
 '''
-from .db_conn import db_conn, exec_insert, exec_select
-import time
-from datetime import date, datetime, timedelta
+from .db_conn import exec_insert, exec_select
+from datetime import datetime
 from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests, logging
-import os
 from dotenv import load_dotenv
 load_dotenv()
 

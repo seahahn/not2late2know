@@ -5,7 +5,7 @@
 서울 기온 데이터는 매일 12시에 전일 기온 데이터를 받아온 후 DB에 저장.
 세계 평균 기온 데이터는 매일 0시에 전월 데이터 존재 여부 확인 후 있으면 저장.
 '''
-from .db_conn import db_conn, exec_insert, exec_select
+from .db_conn import exec_insert, exec_select
 from datetime import date, datetime, timedelta
 from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler

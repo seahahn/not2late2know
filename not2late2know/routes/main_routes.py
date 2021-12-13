@@ -5,9 +5,6 @@ from util.modeling import gbtemp_query, gbtemp_columns, co2_query, co2_columns, 
 
 bp = Blueprint('main', __name__, template_folder='templates')
 
-@bp.route('/test')
-def test():
-    return render_template('test.html')
 @bp.route('/')
 def index():
     return render_template('index.html')
@@ -15,22 +12,6 @@ def index():
 @bp.route('/main')
 def main():
     return render_template('index.html')
-
-@bp.route('/arctic')
-def arctic():
-    return render_template('arctic.html')
-
-@bp.route('/elements')
-def elements():
-    return render_template('elements.html')
-
-@bp.route('/generic')
-def generic():
-    return render_template('generic.html')
-
-@bp.route('/landing')
-def landing():
-    return render_template('landing.html')
 
 def return_gbtemp_json():
     result = exec_select(gbtemp_query)
