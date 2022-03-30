@@ -94,3 +94,6 @@ Not 2 Late 2 know 는 갈수록 심해지는 기후 변화에 대하여 보다 �
 ```
 /ml/nitrous/?year={int:year}&month={int:month}
 ```
+
+## 프로젝트 시연 영상 (클릭 시 이동)
+[![Project Not2Late2Know Presentation](https://user-images.githubusercontent.com/73585246/160866813-34ec2c18-b5cf-4978-831f-f9cfa18443d2.PNG)](https://youtu.be/6v5VtH4JQr4)
