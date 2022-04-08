@@ -1,12 +1,31 @@
-# Project Not 2 Late 2 Know
+# ❇️ Not 2 Late 2 Know
 
-## Introduce
+## 1️⃣ 작품 소개
 
-Not 2 Late 2 know 는 갈수록 심해지는 기후 변화에 대하여 보다 많은 사람들에게 경각심을 주기 위한 목적으로 만들어진 웹 어플리케이션입니다.
+- 갈수록 심해지는 기후 변화에 대하여 보다 많은 사람들에게 경각심을 주기 위한 목적으로 만들어진 웹 어플리케이션
+- 기후 변화에 관한 주요 요소들 중 세계 평균 기온, 온실 가스, 북극 해빙 면적 그리고 해수면 높이에 대한 내용 수록
 
-이를 위해 기후 변화에 관한 주요 요소들 중 세계 평균 기온, 이산화탄소와 메탄, 아산화질소를 포함한 온실 가스, 북극 해빙 면적 그리고 해수면 높이에 대한 내용을 담고 있습니다.
+<br/>
 
-## Service Structure
+## 2️⃣ 제작 기간 & 참여 인원
+- 2021.12.03 - 2021.12.13
+- 개인 프로젝트
+
+<br/>
+
+## 3️⃣ 사용 기술
+
+| 분류 | 기술 목록 |
+| --- | --- |
+| Frontend | HTML/CSS/JS, Chart.js 3.6.2 |
+| Backend | Flask 2.0.2, APScheduler 3.8.1, Python 3.8.10 |
+| Database | PostgreSQL(ElephantSQL) |
+| DevOps | Heroku |
+| Data Science | Pandas 1.3.4, Scikit-Learn 1.0.1 |
+
+<br/>
+
+## 4️⃣ 서비스 구조
 
 ![not2late2know_service_structure](https://user-images.githubusercontent.com/73585246/145774815-c99ba9d5-182c-4ec7-a127-9d297e8859fc.png)
 
@@ -20,7 +39,9 @@ Not 2 Late 2 know 는 갈수록 심해지는 기후 변화에 대하여 보다 �
    2. 해수면 높이 추가 시각화 앱 제공 (https://csb-6kq9k.netlify.app/)-Origin from :(https://openlayers.org/en/latest/examples/webgl-sea-level.html)
 4. Heroku를 통한 배포 (https://not2late2know.herokuapp.com/)
 
-## API Service Usage
+<br/>
+
+## 5️⃣ API 사용법
 
 - Base URL : [not2late2know.herokuapp.com/](https://not2late2know.herokuapp.com/)
 - Base URL 뒤에 원하는 API에 해당하는 경로를 입력하시면 됩니다.
@@ -95,5 +116,5 @@ Not 2 Late 2 know 는 갈수록 심해지는 기후 변화에 대하여 보다 �
 /ml/nitrous/?year={int:year}&month={int:month}
 ```
 
-## 프로젝트 시연 영상 (클릭 시 이동)
+## 6️⃣ 프로젝트 시연 영상 (클릭 시 이동)
 [![Project Not2Late2Know Presentation](https://user-images.githubusercontent.com/73585246/160866813-34ec2c18-b5cf-4978-831f-f9cfa18443d2.PNG)](https://youtu.be/6v5VtH4JQr4)
