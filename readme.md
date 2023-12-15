@@ -1,121 +1,132 @@
 # ❇️ Not 2 Late 2 Know
 
-## 1️⃣ 작품 소개
+## 1️⃣ Project Introduction
 
-- 갈수록 심해지는 기후 변화에 대하여 보다 많은 사람들에게 경각심을 주기 위해 만들어진 웹 어플리케이션
-- 기후 변화에 관한 주요 요소들 중 세계 평균 기온, 온실 가스, 북극 해빙 면적 그리고 해수면 높이에 대한 내용 수록
-- 바로가기 : [not2late2know.herokuapp.com](https://not2late2know.herokuapp.com)
+- A web application created to raise awareness about the escalating climate change among a wider audience
+- Includes information on key elements of climate change, such as global average temperature, greenhouse gases, Arctic sea ice area, and sea level rise
+- Visit: ~~[not2late2know.herokuapp.com](https://not2late2know.herokuapp.com)~~
+  - Because of the server cost, it is temporarily closed
 
 <br/>
 
-## 2️⃣ 제작 기간 & 참여 인원
-- 2021.12.03 - 2021.12.13
-- 개인 프로젝트
+## 2️⃣ Development Period & Team
+
+- Dec 3, 2021 - Dec 13, 2021
+- Personal project
 
 <br/>
 
 ## 3️⃣ 사용 기술
 
-| 분류 | 기술 목록 |
-| --- | --- |
-| Frontend | HTML/CSS/JS, Chart.js 3.6.2 |
-| Backend | Flask 2.0.2, APScheduler 3.8.1, Python 3.8.10 |
-| Database | PostgreSQL(ElephantSQL) |
-| DevOps | Heroku |
-| Data Science | Pandas 1.3.4, Scikit-Learn 1.0.1 |
+| Category     | Technology                                    |
+| ------------ | --------------------------------------------- |
+| Frontend     | HTML/CSS/JS, Chart.js 3.6.2                   |
+| Backend      | Flask 2.0.2, APScheduler 3.8.1, Python 3.8.10 |
+| Database     | PostgreSQL(ElephantSQL)                       |
+| DevOps       | Heroku                                        |
+| Data Science | Pandas 1.3.4, Scikit-Learn 1.0.1              |
 
 <br/>
 
-## 4️⃣ 서비스 구조
+## 4️⃣ Service Architecture
 
-![not2late2know_service_structure](https://user-images.githubusercontent.com/73585246/145774815-c99ba9d5-182c-4ec7-a127-9d297e8859fc.png)
+![not2late2know_service_structure](https://private-user-images.githubusercontent.com/73585246/290913351-2c1b6d36-da3c-4aba-874c-95ef1836a616.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDI2NjcwMDgsIm5iZiI6MTcwMjY2NjcwOCwicGF0aCI6Ii83MzU4NTI0Ni8yOTA5MTMzNTEtMmMxYjZkMzYtZGEzYy00YWJhLTg3NGMtOTVlZjE4MzZhNjE2LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMTUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjE1VDE4NTgyOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxZTQ5OGViNjNjY2FiYTliMzczM2I5YTllMGM1ZjQ0NTZlODcwNWY5OTM4NjVlZmM1Mjk5NWFjOGI2NDkyMmImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.y188kwre1uZKgk0f73HWyfUdgDN3QdzuLWJPvF09Qb4)
 
-1. global-warming.org에서 제공하는 API 및 미국 환경 보호국(EPA)에서 다운로드 받은 기후 변화 관련 요소 데이터를 클라우드 데이터베이스(ElephantSQL-PostgreSQL 기반)에 저장
-   - 해수면 높이를 제외한 나머지 데이터는 APScheduler(Advanced Python Scheduler)를 통해 주기적으로 자동 갱신
-2. 가져온 데이터를 바탕으로 API 서비스 제공
-   1. JSON 형태로 데이터를 보내주는 API 서비스
-   2. 입력 양식에 맟추어 값 입력 시 예측 결과를 보내주는 머신 러닝 모델을 통한 값 예측 API 서비스
-3. 각각의 데이터 항목을 차트로 표현 & 모든 차트를 한 곳에서 확인 가능한 대시보드 페이지 제공
-   1. 북극 해빙 면적 추가 시각화 앱 제공 (https://livingatlas.arcgis.com/sea-ice/)
-   2. 해수면 높이 추가 시각화 앱 제공 (https://csb-6kq9k.netlify.app/)-Origin from :(https://openlayers.org/en/latest/examples/webgl-sea-level.html)
-4. Heroku를 통한 배포 (https://not2late2know.herokuapp.com/)
+1. Data related to climate change elements, obtained from the API provided by global-warming.org and downloaded from the U.S. Environmental Protection Agency (EPA), is stored in a cloud database (ElephantSQL-PostgreSQL based)
+   - Except for sea level rise, all other data is periodically and automatically updated using APScheduler (Advanced Python Scheduler)
+2. API services based on the retrieved data:
+   - API service that sends data in JSON format
+   - API service for predicting values using a machine learning model, which sends predicted results when values are entered according to the input form
+3. Provides visualization of each data item in charts and a dashboard page where all charts can be viewed in one place
+4. Deployment using Heroku ~~(https://not2late2know.herokuapp.com/)~~
 
 <br/>
 
-## 5️⃣ API 사용법
+## 5️⃣ API Usage
 
-- Base URL : [not2late2know.herokuapp.com/](https://not2late2know.herokuapp.com/)
-- Base URL 뒤에 원하는 API에 해당하는 경로를 입력하시면 됩니다.
-  - ex. 세계 평균 기온 전체 데이터 가져오기 : not2late2know.herokuapp.com/api/global-temp/
-- {원하는_값} : 원하는_값 안에 가져올 데이터에 해당하는 값을 입력하세요.
-  - 올바르지 않은 입력값인 경우 오류 메시지 출력
-  - {int:whatever} -> 정수(integer)를 입력해야 합니다.
-  - ex. 세계 평균 기온 2010년 10월 데이터 : not2late2know.herokuapp.com/api/global-temp/2010/10
+- Base URL : ~~[not2late2know.herokuapp.com/](https://not2late2know.herokuapp.com/)~~
+- Enter the path corresponding to the desired API after the base URL.
+  - e.g., Get global average temperature data: not2late2know.herokuapp.com/api/global-temp/
+- {desired_value}: Enter the value corresponding to the data you want to retrieve.
+  - In case of incorrect input, an error message will be displayed.
+  - {int:whatever} -> Should enter an integer.
+  - ex. e.g., Global average temperature data for October 2010: not2late2know.herokuapp.com/api/global-temp/2010/10
 
-### 1) JSON 데이터 가져오기(GET)
+### 1) Fetch JSON Data (GET)
 
-1. 세계 평균 기온
+1. Global Average Temperature
+
 ```
-- 전체 데이터 : /api/global-temp/
-- 특정 년도 데이터 : /api/global-temp/{int:year}
-- 특정 년/월 데이터 : /api/global-temp/{int:year}/{int:month}
-```
-
-2. 대기 중 이산화탄소 양
-```
-- 전체 데이터 : /api/co2/
-- 특정 년도 데이터 : /api/co2/{int:year}
-- 특정 년/월 데이터 : /api/co2/{int:year}/{int:month}
-/api/co2/{int:year}/{int:month}/{int:day}
+- All data : /api/global-temp/
+- Specific year data : /api/global-temp/{int:year}
+- Specific year/month data : /api/global-temp/{int:year}/{int:month}
 ```
 
-3. 대기 중 메탄 양
+2. Atmospheric Carbon Dioxide Amount
+
 ```
-- 전체 데이터 : /api/methane/
-- 특정 년도 데이터 : /api/methane/{int:year}
-- 특정 년/월 데이터 : /api/methane/{int:year}/{int:month}
+- All data : /api/co2/
+- Specific year data : /api/co2/{int:year}
+- Specific year/month data : /api/co2/{int:year}/{int:month}
+- Specific year/month/day data : /api/co2/{int:year}/{int:month}/{int:day}
 ```
 
-4. 대기 중 아산화질소 양
+3. Atmospheric Methane Amount
+
 ```
-- 전체 데이터 : /api/nitrous/
-- 특정 년도 데이터 : /api/nitrous/{int:year}
-- 특정 년/월 데이터 : /api/nitrous/{int:year}/{int:month}
+- All data : /api/methane/
+- Specific year data : /api/methane/{int:year}
+- Specific year/month data : /api/methane/{int:year}/{int:month}
 ```
 
-5. 북극 해빙 면적
+4. Atmospheric Nitrous Oxide Amount
+
 ```
-- 전체 데이터 : /api/sea-ice/
-- 특정 년도 데이터 : /api/sea-ice/{int:year}
+- All data : /api/nitrous/
+- Specific year data : /api/nitrous/{int:year}
+- Specific year/month data : /api/nitrous/{int:year}/{int:month}
 ```
 
-6. 해수면 높이
+5. Arctic Sea Ice Area
+
 ```
-- 전체 데이터 : /api/sea-level/
-- 특정 년도 데이터 : /api/sea-level/{int:year}
+- All data : /api/sea-ice/
+- Specific year data : /api/sea-ice/{int:year}
 ```
 
-### 2) 머신 러닝 모델을 통한 값 예측(GET)
+6. Sea Level Rise
 
-1. 세계 평균 기온
+```
+- All data : /api/sea-level/
+- Specific year data : /api/sea-level/{int:year}
+```
+
+### 2) Predict Values Using Machine Learning Model (GET)
+
+1. Global Average Temperature
+
 ```
 /ml/global-temp/?year={int:year}&month={int:month}
 ```
 
-1. 대기 중 이산화탄소 양
+2. Atmospheric Carbon Dioxide Amount
+
 ```
 /ml/co2/?year={int:year}&month={int:month}&day={int:day}
 ```
 
-3. 대기 중 메탄 양
+3. Atmospheric Methane Amount
+
 ```
 /ml/methane/?year={int:year}&month={int:month}
 ```
 
-4. 대기 중 아산화질소 양
+4. Atmospheric Nitrous Oxide Amount
+
 ```
 /ml/nitrous/?year={int:year}&month={int:month}
 ```
 
-## 6️⃣ 프로젝트 시연 영상 (클릭 시 이동)
+## 6️⃣ Project Demo Video (Click to Watch)
+
 [![Project Not2Late2Know Presentation](https://user-images.githubusercontent.com/73585246/160866813-34ec2c18-b5cf-4978-831f-f9cfa18443d2.PNG)](https://youtu.be/6v5VtH4JQr4)
